@@ -82,10 +82,9 @@ function drush_metu_convert_featured_slider($lang='en') {
         LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
       WHERE (node.status = 1)
         AND (node.type = '%s')
-        AND (node.language = '%s')
       GROUP BY nid
       ORDER BY node_created DESC
-    ", array('page', $current_lang)
+    ", array('page')
   );
 
   // Initialize counters
@@ -157,10 +156,10 @@ function drush_metu_convert_featured_slider($lang='en') {
           // Fill the body if the link is local
           $node->body = $body;
 
-        } // end $body check
+          // Just to see the count of featured slider nodes which their body is updated.
+          $count_updated_fs_bodies++;
 
-        // Just to see the count of featured slider nodes which their body is updated.
-        $count_updated_fs_bodies++;
+        } // end $body check
 
       } // end $matches_files check
 
