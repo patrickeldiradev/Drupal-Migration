@@ -4,9 +4,9 @@
 
 ### Installation ##
 
-* Put [drushrc.php](.drush/drushrc.php) and [metu.drush.php](.drush/metu.drush.inc) to your local Drush module (ex. __/home/user/.drush__ in Linux)
-* Change directory to your Drupal site root (ex. __cd ~/wwwhome/drupal/sites/default__ )
-* Run `drush cc all` inside your Drupal site root
+* Put [drushrc.php](.drush/drushrc.php) and [metu.drush.php](.drush/metu.drush.inc) to your local Drush module. (ex. __/home/user/.drush__ in Linux)
+* Change directory to your Drupal site root. (ex. __cd ~/wwwhome/drupal/sites/default__ )
+* Run `drush cc all` inside your Drupal site root.
 * You are done!
 
 ### Commands ###
@@ -14,24 +14,24 @@
 You can use following commands by installing the Drush module:
 
 * `drush convert-fs {lang}` where `{lang}` is `en` or `tr`. Defaults to `en`. (processes "featured slider" nodes and splits fields into ones that can be transferable)
-* `drush load-node {nid}` where `{nid}` is _Drupal Node ID_ (shows variables in the node, i.e. $node object)
+* `drush load-node {nid}` where `{nid}` is _Drupal Node ID_. (shows variables in the node, i.e. $node object)
 * `drush convert-vc {lang}` where `{lang}` is `en` or `tr`. Defaults to `en`. (processes "video content" nodes and splits fields into ones that can be transferable)
 
 ## Using metu_migrate Module ##
 
 ### Installation ###
 
-* Install required modules discussed in [README](README.md) file, under __Requirements__ section
+* Install required modules discussed in [README](README.md) file, under __Requirements__ section.
 * Enable the modules using admin panel.
 * __NOTE:__ You can also use Drush to download and enable the required modules. If you want to use Drush:
-    - Change directory to Drupal sites directory (ex. __cd ~/wwwhome/drupal/sites/default__ )
-    - Using `drush dl migrate` and `drush dl migrate_d2d` commands, download the required modules into custom modules directory (i.e. __sites/all/modules__)
-    - Then, go to Drupal site root (ex. __cd ~/wwwhome/drupal/sites/default__ )
+    - Change directory to Drupal sites directory. (ex. __cd ~/wwwhome/drupal/sites/default__ )
+    - Using `drush dl migrate` and `drush dl migrate_d2d` commands, download the required modules into custom modules directory. (i.e. __sites/all/modules__)
+    - Then, go to Drupal site root. (ex. __cd ~/wwwhome/drupal/sites/default__ )
     - Run `drush en migrate` , `drush en migrate_ui` and `drush en migrate_d2d` inside Drupal site root.
-* After installing the required modules, put [metu_migrate](metu_migrate/) directory inside site modules diretory (ex. __sites/default/modules__)
-* Enable metu_migrate module from admin panel under "METU-CC" category or use Drush to enable it by `drush en metu_migrate` command inside Drupal site root (ex. __sites/default/modules__)
+* After installing the required modules, put [metu_migrate](metu_migrate/) directory inside site modules diretory. (ex. __sites/default/modules__)
+* Enable metu_migrate module from admin panel under "METU-CC" category or use Drush to enable it by `drush en metu_migrate` command inside Drupal site root. (ex. __sites/default/modules__)
 * Run `drush cc all` or *Admin Panel -> Performance -> Clear All Caches* to enable custom migrate_d2d migrations inside metu_migrate module.
-    - __NOTE:__ Clearing caches is needed for the migration system to run. It is designed like that by its author. Look *hook_flush_caches()* implementation in the [module file](metu_migrate/metu_migrate.module)
+    - __NOTE:__ Clearing caches is needed for the migration system to run. It is designed like that by its author. Look *hook_flush_caches()* implementation in the [module file](metu_migrate/metu_migrate.module).
 
 ### Usage ###
 
