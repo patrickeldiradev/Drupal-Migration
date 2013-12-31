@@ -31,6 +31,10 @@ function orb_drush_command() {
     'description' => 'Fix translations after migration process',
     'alias' => array('orb-ft'),
   );
+  $items['orb-remove-taxonomy-term'] = array(
+    'description' => 'Removes taxonomy terms',
+    'alias' => array('orb-rtt'),
+  );
 
   return $items;
 }
@@ -393,5 +397,50 @@ function drush_orb_fix_translations() {
 
   // Print informational messages
   drush_print('Processed node count: ' . $count);
+
+}
+
+/**
+ * Drush Command: drush del-tax
+ * Removes defined taxonomy term
+ */
+function drush_orb_remove_taxonomy_term() {
+
+  // Static definition of taxonomy term ID
+  $tax_term_tid = 17;
+
+  // Query featured_slider nodes
+  $all_nodes = db_query("SELECT nid AS nid FROM node WHERE type = 'featured_slider'");
+
+  foreach ($all_nodes as $an) { // foreach start $all_nodes
+
+    // Load the node
+    $node = node_load($an->nid);
+
+    // We are working with "User Groups" field
+    $data = $node->field_user_groups;
+
+    foreach ($data as $key => $value) { // foreach start $data
+
+      foreach ($value as $vkey => $vvalue) { // foreach start $value
+
+        if ($vvalue['tid'] == $tax_term_tid) { // start $vvalue['tid'] check
+
+          // Unset given taxonomy term from loaded node
+          unset($data[$key][$vkey]);
+
+        } // end $vvalue['tid'] check
+
+      } // foreach end $value
+
+    } // foreach end $data
+
+    // Set new "User Groups" array
+    $node->field_user_groups = $data;
+
+    // Save the opened node
+    node_save($node);
+
+  } // foreach end $all_nodes
 
 }
