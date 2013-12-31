@@ -6,28 +6,28 @@
 function orb_drush_command() {
 
   $items = array();
-  $items['data-convert-featured-slider'] = array(
+  $items['orb-convert-featured-slider'] = array(
     'description' => 'Convert Featured Slider Content Type',
     'alias' => array('metu-cfs'),
     'arguments' => array(
       'lang' => 'Language of the node, like "en" or "tr" (without quotes)',
     ),
   );
-  $items['data-load-node'] = array(
+  $items['orb-load-node'] = array(
     'description' => 'Convert Featured Slider Content Type',
     'alias' => array('metu-ln'),
     'arguments' => array(
       'nid' => 'Node ID to load',
     ),
   );
-  $items['data-convert-video-content'] = array(
+  $items['orb-convert-video-content'] = array(
     'description' => 'Convert "Video Content" Content Type',
     'alias' => array('metu-cvc'),
     'arguments' => array(
       'lang' => 'Language of the node, like "en" or "tr" (without quotes)',
     ),
   );
-  $items['data-fix-translations'] = array(
+  $items['orb-fix-translations'] = array(
     'description' => 'Fix translations after migration process',
     'alias' => array('metu-ft'),
   );
