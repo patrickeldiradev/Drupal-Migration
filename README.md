@@ -49,4 +49,4 @@ Content types with related fields and taxonomy vocabularies should be created be
 
 ## Usage ##
 
-See [Usage](USAGE.md) for details.
+See [USAGE](USAGE.md) for details.
