@@ -344,21 +344,24 @@ function drush_orb_fix_translations() {
 
   // It just works right in this way. Otherwise, it is slow to use any kind of iterator.
   $trs = array();
-  foreach ($translations as $t) {
 
-    if ($t->source_tnid != 0) {
+  foreach ($translations as $t) { // foreach start $translations
+
+    if ($t->source_tnid != 0) { // start $t->source_tnid check
+
       $snid = $t->source_nid;
       $trs[$snid]['snid'] = $t->source_nid;
       $trs[$snid]['stnid'] = $t->source_tnid;
       $trs[$snid]['dnid'] = $t->dest_nid;
-    }
 
-  }
+    } // end $t->source_tnid check
+
+  } // foreach end $translations
 
   // We want to measure time -starting time-
   $start_time = time();
 
-  foreach ($old_nodes as $on) {
+  foreach ($old_nodes as $on) { // foreach start $old_nodes
 
     $dest_node = $trs[$on->nid]['dnid'];
 
@@ -366,7 +369,7 @@ function drush_orb_fix_translations() {
 
     $final_dest = $trs[$source_translated_id]['dnid'];
 
-    if (!empty($final_dest)) {
+    if (!empty($final_dest)) { // start $final_dest check
 
       // Load the node
       $node = node_load($dest_node);
@@ -387,13 +390,13 @@ function drush_orb_fix_translations() {
       // We can save the node right now
       node_save($node);
 
-    } else {
+    } else { // other conditions in $final_dest check
 
       //drush_print($dest_node);
 
-    }
+    } // end $final_dest check
 
-  }
+  } // foreach end $old_nodes
 
   // Print informational messages
   drush_print('Processed node count: ' . $count);
