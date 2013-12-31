@@ -4,7 +4,7 @@
 
 This repository contains a Drush module and migrate_d2d module for migration from D6 to D7.
 
-__Drush Module__ : This module is used for converting some several fields to another separate fields in a content type. This separation operation makes field-to-field migration easy.
+__Drush Module__ : This module is used for converting some several fields to another separate fields in a content type. This separation operation makes field-to-field migration easy. Additionally, this module can dump node variables and fix translation matches after migration process.
 
 __Migrate Module__ : This module is the main migration module.
 
