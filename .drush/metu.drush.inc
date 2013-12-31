@@ -220,6 +220,11 @@ function drush_metu_load_node($nid=0) {
 
 }
 
+/*
+ * Drush Command: drush convert-vc $lang (default $lang = en)
+ * Extracts Youtube link code and updates Video Embed field in "Video Content" content type
+ *
+ */
 function drush_metu_convert_video_content($lang='en') {
 
   // We are setting up the language of the nodes in consideration
