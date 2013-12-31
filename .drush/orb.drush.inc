@@ -7,21 +7,21 @@ function orb_drush_command() {
 
   $items = array();
   $items['orb-convert-featured-slider'] = array(
-    'description' => 'Convert Featured Slider Content Type',
+    'description' => 'Convert "Featured Slider" content type to fit D7 side',
     'alias' => array('metu-cfs'),
     'arguments' => array(
       'lang' => 'Language of the node, like "en" or "tr" (without quotes)',
     ),
   );
   $items['orb-load-node'] = array(
-    'description' => 'Convert Featured Slider Content Type',
+    'description' => 'Dumps node array elements to screen',
     'alias' => array('metu-ln'),
     'arguments' => array(
       'nid' => 'Node ID to load',
     ),
   );
   $items['orb-convert-video-content'] = array(
-    'description' => 'Convert "Video Content" Content Type',
+    'description' => 'Convert "Video Content" content type to fit D7 side',
     'alias' => array('metu-cvc'),
     'arguments' => array(
       'lang' => 'Language of the node, like "en" or "tr" (without quotes)',
