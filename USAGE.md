@@ -30,14 +30,14 @@ You can use following commands by installing the Drush module:
     - Run `drush en migrate` , `drush en migrate_ui` and `drush en migrate_d2d` inside Drupal site root.
 * After installing the required modules, put [metu_migrate](metu_migrate/) directory inside site modules diretory (ex. __sites/default/modules__)
 * Enable metu_migrate module from admin panel under "METU-CC" category or use Drush to enable it by `drush en metu_migrate` command inside Drupal site root (ex. __sites/default/modules__)
-* Run `drush cc all` or _"Admin Panel -> Performance -> Clear All Caches"_ to enable custom migrate_d2d migrations inside metu_migrate module.
-    - __NOTE:__ Clearing caches is needed for the migration system to run. It is designed like that by its author. Look _hook_flush_caches()_ implementation in the [module file](metu_migrate/metu_migrate.module)
+* Run `drush cc all` or *Admin Panel -> Performance -> Clear All Caches* to enable custom migrate_d2d migrations inside metu_migrate module.
+    - __NOTE:__ Clearing caches is needed for the migration system to run. It is designed like that by its author. Look *hook_flush_caches()* implementation in the [module file](metu_migrate/metu_migrate.module)
 
 ### Usage ###
 
 It is possible to use this module inside _Migrate UI_ or _Drush_.
 
-* __Migrate UI:__ Admin Panel -> Content -> Migrate Tab
+* __Migrate UI:__ *Admin Panel -> Content -> Migrate Tab*
 * __Drush:__ _Migrate_ module has several Drush commands. Sticking to the basics:
     - `drush migrate-import --all` (runs all migrations and transfers all data from D6 to D7)
     - `drush migrate-rollback --all` (removes all transferred data from D7 but not from D6)
@@ -52,7 +52,7 @@ __How can I download the code in Windows?__
     - Set up the paths to include `git` command.
     - Change to your desired directory.
     - Use `git clone https://github.com/orbingol/migration.git` command from CLI.
-    - You can see the code inside `migration` subdirectory.
+    - You can see the code inside *migration* subdirectory.
 * Solution 2:
     * Use a free and good-looking program like [Atlassian SourceTree](http://www.sourcetreeapp.com/).
     * SourceTree also works in Mac.
