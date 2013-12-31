@@ -3,7 +3,7 @@
 /**
  * Implementation of hook_drush_command()
  */
-function metu_drush_command() {
+function orb_drush_command() {
 
   $items = array();
   $items['data-convert-featured-slider'] = array(
@@ -39,7 +39,7 @@ function metu_drush_command() {
  * Drush Command: drush convert-fs $lang (default $lang = en)
  * Updates "Featured Slider" content type with the body of the local linked page
  */
-function drush_data_convert_featured_slider($lang='en') {
+function drush_orb_convert_featured_slider($lang='en') {
 
   // We are setting up the language of the nodes in consideration
   if (isset($lang)) {
@@ -214,7 +214,7 @@ function drush_data_convert_featured_slider($lang='en') {
  * Drush Command: drush load-node $nid
  * Loads node by its ID and dumps the node variables
  */
-function drush_data_load_node($nid=0) {
+function drush_orb_load_node($nid=0) {
 
   if($nid == 0) {
 
@@ -233,7 +233,7 @@ function drush_data_load_node($nid=0) {
  * Drush Command: drush convert-vc $lang (default $lang = en)
  * Extracts Youtube link code and updates Video Embed field in "Video Content" content type
  */
-function drush_data_convert_video_content($lang='en') {
+function drush_orb_convert_video_content($lang='en') {
 
   // We are setting up the language of the nodes in consideration
   if (isset($lang)) {
@@ -319,7 +319,7 @@ function drush_data_convert_video_content($lang='en') {
  * Drush Command: drush fix-tr
  * Fixes translation migrations after migrate operations
  */
-function drush_data_fix_translations() {
+function drush_orb_fix_translations() {
 
   // We want this function to run only in Drupal 7 and we check using PHP version_compare() function.
   if (version_compare(VERSION, '7', '<')) {
