@@ -28,7 +28,7 @@ You can use following commands by installing the Drush module:
     - Using `drush dl migrate` and `drush dl migrate_d2d` commands, download the required modules into custom modules directory (i.e. __sites/all/modules__)
     - Then, go to Drupal site root (ex. __cd ~/wwwhome/drupal/sites/default__ )
     - Run `drush en migrate` , `drush en migrate_ui` and `drush en migrate_d2d` inside Drupal site root.
-* After installing the required modules, put "metu_migrate" directory inside site modules diretory (ex. __sites/default/modules__)
+* After installing the required modules, put [metu_migrate](metu_migrate/) directory inside site modules diretory (ex. __sites/default/modules__)
 * Enable metu_migrate module from admin panel under "METU-CC" category or use Drush to enable it by `drush en metu_migrate` command inside Drupal site root (ex. __sites/default/modules__)
 * Run `drush cc all` or _"Admin Panel -> Performance -> Clear All Caches"_ to enable custom migrate_d2d migrations inside metu_migrate module.
     - __NOTE:__ Clearing caches is needed for the migration system to run. It is designed like that by its author. Look _hook_flush_caches()_ implementation in the [module file](metu_migrate/metu_migrate.module)
