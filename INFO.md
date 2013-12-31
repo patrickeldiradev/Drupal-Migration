@@ -4,4 +4,4 @@
 
 ### About Drush ###
 
-Drush is on Gihub! drush-ops/drush
+Drush is on Github! [https://github.com/drush-ops/drush](https://github.com/drush-ops/drush)
