@@ -45,7 +45,7 @@ function metu_migrate_featured_slider($common_arguments) {
     'source_type' => 'featured_slider',
     'destination_type' => 'featured_slider',
     'user_migration' => 'UserMigration', // Migrate users before migrating the content type
-    'dependencies' => array(),
+    'dependencies' => array('UGTaxMigration'),
   );
   
   // Call Drupal-to-Drupal Migration module (using overridden class)
@@ -93,7 +93,7 @@ function metu_migrate_researchers($common_arguments) {
       'source_type' => 'interview_anouncements',
       'destination_type' => 'researchers_page',
       'user_migration' => 'UserMigration', // Migrate users before migrating the content type
-      'dependencies' => array(),
+      'dependencies' => array('ResTaxMigration'),
     );
 
   // Call Drupal-to-Drupal Migration module (using overridden class)
