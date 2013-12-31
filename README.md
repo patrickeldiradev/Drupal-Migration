@@ -45,3 +45,7 @@ Content types with related fields and taxonomy vocabularies should be created be
 * After deleting some content types, SQL query changes and Drush module should be updated to fit these changes.
 * Delete unwanted taxonomy terms after migration.
 * ~~Do not use menu migration, because some menus are not planned for transfer.~~
+
+## Usage ##
+
+See [Usage](USAGE.md) for details.
