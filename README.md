@@ -51,6 +51,3 @@ Content types with related fields and taxonomy vocabularies should be created be
 
 See [USAGE](USAGE.md) for details.
 
-## Developer ##
-
-Onur Rauf Bingol
