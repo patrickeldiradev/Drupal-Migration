@@ -38,7 +38,7 @@ Content types with related fields and taxonomy vocabularies should be created be
 
 ### Module Changes ###
 
-* SWFUpload -> jQuery File Upload (https://drupal.org/project/jquery_file_upload)
+* SWFUpload -> [jQuery File Upload](https://drupal.org/project/jquery_file_upload)
 
 ### Problems & Solutions ###
 
