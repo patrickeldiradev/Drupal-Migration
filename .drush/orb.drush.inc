@@ -408,7 +408,7 @@ function drush_orb_fix_translations() {
 
 /**
  * Drush Command: drush del-tax
- * Removes defined taxonomy term
+ * Removes defined taxonomy term from "featured_slider" nodes
  */
 function drush_orb_remove_taxonomy_term() {
 
