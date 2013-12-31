@@ -183,6 +183,46 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
 
   }
 
+  /**
+   * prepare() method from Migrate module
+   * Runs before node_save operation
+   *
+   */
+  public function prepare($node, stdClass $row) {
+
+    // Print source node ID to the command line
+    drush_print(' / Source node: ' . $row->nid, 0, null, false);
+
+    // Set Expire Date Field ($node is D7, $row is D6 side)
+    $node->field_expire_date['und'][0]['value'] = $row->field_expire_date;
+
+  }
+
+  /**
+   * complete() method from Migrate module
+   * Runs after node_save operation
+   *
+   */
+  public function complete($entity, stdClass $row) {
+
+    // Print destination node ID to the command line
+    drush_print('Destination node: ' . $entity->nid, 5, null, false);
+
+    // Determine forwarded nodes
+    if (!empty($entity->field_forward_uri['und'][0]['value'])) {
+
+      // If Forward URI is not empty, print a message about it
+      drush_print('(Forward enabled)', 2, null, true);
+
+    } else {
+
+      // Print empty line because it is needed for readability of the console messages
+      drush_print('');
+
+    }
+
+  }
+
 }
 
 class METUVCNodeMigrator extends DrupalNode6Migration {
