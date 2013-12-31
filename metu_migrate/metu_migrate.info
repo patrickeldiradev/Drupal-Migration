@@ -1,0 +1,9 @@
+name = "METU Web Site Migration"
+description = "Migrate METU Main Page from D6 to D7"
+package = "METU-CC"
+core = 7.x
+
+dependencies[] = migrate
+dependencies[] = migrate_ui
+dependencies[] = migrate_d2d
+

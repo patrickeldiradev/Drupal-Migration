@@ -1,0 +1,125 @@
+<?php
+
+/**
+* Implementation of hook_migrate_api().
+*/
+function metu_migrate_migrate_api() {
+  
+  // We may not need to define this but the tutorials defined such a method, so we did.
+  $api = array(
+    'api' => 2,
+  );
+  return $api;
+  
+}
+
+/**
+* Implementation of hook_flush_caches().
+*/
+function metu_migrate_flush_caches() {
+
+  // Define all migrations in this function
+  
+  $common_arguments = array(
+    'source_version' => 6,
+    'source_connection' => 'source'
+  );
+  
+  // We should do Performance->Clear All Caches or "drush cc all" to enable migration options in the Content menu
+  metu_migrate_bookpage($common_arguments);
+  metu_migrate_page($common_arguments);
+  metu_migrate_files($common_arguments);
+  metu_migrate_users($common_arguments);
+  
+}  
+
+function metu_migrate_bookpage($common_arguments) {
+
+  $args = $common_arguments + array(     
+    'description' => 'Migrate book page nodes',
+    'machine_name' => 'BookPageMigration', // Call name of this migration through this module
+    'source_type' => 'book',
+    'destination_type' => 'page',
+    'user_migration' => 'UserMigration', // Migrate users before migrating "book" content type
+    'dependencies' => array(),
+  );
+  
+  // Call Drupal-to-Drupal Migration module (using overridden class)
+  Migration::registerMigration($migration_class="METUNodeMigrator", $args['machine_name'], $args);
+  
+}
+
+function metu_migrate_page($common_arguments) {
+
+  $args = $common_arguments + array(     
+    'description' => 'Migrate page nodes',
+    'machine_name' => 'PageMigration', // Call name of this migration through this module
+    'source_type' => 'page',
+    'destination_type' => 'page',
+    'user_migration' => 'UserMigration', // Migrate users before migrating "page" content type
+    'dependencies' => array(),
+  );
+  
+  // Call Drupal-to-Drupal Migration module (using overridden class)
+  Migration::registerMigration($migration_class="METUNodeMigrator", $args['machine_name'], $args);
+  
+}
+
+function metu_migrate_files($common_arguments) {
+  $args = $common_arguments + array(
+    'description' => 'File migration.',
+    'machine_name' => 'FileMigration',
+    'source_dir' => 'http://gercek.metu.edu.tr', // We will retrieve all data using the domain name. It is much more easier.
+    'destination_dir' => 'private://page', // It is possible to change it to any directory name. It is also possible to use "public://" shortcut
+  );
+  
+  // Call Drupal-to-Drupal Migration module (using overridden class)
+  Migration::registerMigration($migration_class="METUFileMigrator", $args['machine_name'], $args);
+}
+
+function metu_migrate_users($common_arguments) {
+  $args = $common_arguments + array(
+    'description' => 'User Migration',
+    'machine_name' => 'UserMigration',
+  );
+ 
+  // Call Drupal-to-Drupal Migration module (using native class)
+  Migration::registerMigration($migration_class="DrupalUser6Migration", $args['machine_name'], $args);
+}
+
+// Overriding Node Migration class
+class METUNodeMigrator extends DrupalNode6Migration {
+
+  public function __construct(array $arguments) {
+    
+    // Call parent method
+    parent::__construct($arguments);
+    
+    // After Drushing upload module to filefield module, we can map filefield fields to D7 Field API
+    $this->addFieldMapping('field_attachments', 'field_attachments')->sourceMigration('FileMigration');
+    $this->addFieldMapping('field_attachments:file_class')->defaultValue('MigrateFileFid');
+    
+  }
+}
+
+// Overriding File Migration class
+class METUFileMigrator extends DrupalFile6Migration {
+  
+  public function __construct(array $arguments) {
+    parent::__construct($arguments);
+
+    // Due to the structure of the data in our database, we have to use a callback and this is the only way.
+    $this->addFieldMapping('destination_file', 'filepath')->callbacks(array($this, 'fixMe'));
+    
+  }
+  
+  // Callback method for fixing file paths in the database
+  public function fixMe($uri) {
+  
+    $correctedLegacyPath = 'sites/default/files/';
+    $result = str_replace($correctedLegacyPath, '', $uri);
+    return $result;
+  
+  }
+  
+}
