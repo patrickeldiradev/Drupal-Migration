@@ -4,7 +4,7 @@
 
 ### Installation ##
 
-* Put [drushrc.php](.drush/drushrc.php) and [metu.drush.php](.drush/metu.drush.inc) to your local Drush module. (ex. __/home/user/.drush__ in Linux)
+* Put [drushrc.php](.drush/drushrc.php) and [orb.drush.php](.drush/orb.drush.inc) to your local Drush module. (ex. __/home/user/.drush__ in Linux)
 * Change directory to your Drupal site root. (ex. __cd ~/wwwhome/drupal/sites/default__ )
 * Run `drush cc all` inside your Drupal site root.
 * You are done!
