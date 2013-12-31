@@ -44,7 +44,7 @@ function metu_migrate_featured_slider($common_arguments) {
     'machine_name' => 'FSMigration', // Call name of this migration through this module
     'source_type' => 'featured_slider',
     'destination_type' => 'featured_slider',
-    'user_migration' => 'UserMigration', // Migrate users before migrating "book" content type
+    'user_migration' => 'UserMigration', // Migrate users before migrating the content type
     'dependencies' => array(),
   );
   
@@ -60,7 +60,7 @@ function metu_migrate_video_content($common_arguments) {
       'machine_name' => 'VCMigration', // Call name of this migration through this module
       'source_type' => 'video_content',
       'destination_type' => 'video',
-      'user_migration' => 'UserMigration', // Migrate users before migrating "book" content type
+      'user_migration' => 'UserMigration', // Migrate users before migrating the content type
       'dependencies' => array(),
     );
 
@@ -76,7 +76,7 @@ function metu_migrate_page($common_arguments) {
     'machine_name' => 'PageMigration', // Call name of this migration through this module
     'source_type' => 'page',
     'destination_type' => 'page',
-    'user_migration' => 'UserMigration', // Migrate users before migrating "page" content type
+    'user_migration' => 'UserMigration', // Migrate users before migrating the content type
     'dependencies' => array(),
   );
   
@@ -92,7 +92,7 @@ function metu_migrate_researchers($common_arguments) {
       'machine_name' => 'ResearchersMigration', // Call name of this migration through this module
       'source_type' => 'interview_anouncements',
       'destination_type' => 'researchers_page',
-      'user_migration' => 'UserMigration', // Migrate users before migrating "page" content type
+      'user_migration' => 'UserMigration', // Migrate users before migrating the content type
       'dependencies' => array(),
     );
 
