@@ -193,7 +193,7 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
   public function prepare($node, stdClass $row) {
 
     // Print source node ID to the command line
-    drush_print(' / Source node: ' . $row->nid, 0, null, false);
+    drush_print('FS Source node: ' . $row->nid, 2, null, false);
 
     // Set Expire Date Field ($node is D7, $row is D6 side)
     $node->field_expire_date['und'][0]['value'] = $row->field_expire_date;
@@ -207,7 +207,7 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
   public function complete($entity, stdClass $row) {
 
     // Print destination node ID to the command line
-    drush_print('Destination node: ' . $entity->nid, 5, null, false);
+    drush_print(' / Destination node: ' . $entity->nid, 0, null, false);
 
     // Determine forwarded nodes
     if (!empty($entity->field_forward_uri['und'][0]['value'])) {
@@ -242,6 +242,31 @@ class METUVCNodeMigrator extends DrupalNode6Migration {
     // Video Thumbnail Field
     $this->addFieldMapping('field_video_thumbnail', 'field_video_thumbnail')->sourceMigration('FileMigration');
     $this->addFieldMapping('field_video_thumbnail:file_class')->defaultValue('MigrateFileFid');
+
+  }
+
+  /**
+   * prepare() method from Migrate module
+   * Runs before node_save operation
+   */
+  public function prepare($node, stdClass $row) {
+
+    // Print source node ID to the command line
+    drush_print('VC Source node: ' . $row->nid, 2, null, false);
+
+    // Set Expire Date Field ($node is D7, $row is D6 side)
+    $node->field_video_embed['und'][0]['video_url'] = $row->field_video_embed;
+
+  }
+
+  /**
+   * complete() method from Migrate module
+   * Runs after node_save operation
+   */
+  public function complete($entity, stdClass $row) {
+
+    // Print destination node ID to the command line
+    drush_print(' / Destination node: ' . $entity->nid, 0, null, true);
 
   }
 
