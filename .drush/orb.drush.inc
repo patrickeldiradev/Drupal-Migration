@@ -523,7 +523,7 @@ function drush_orb_fix_forwards() {
 
 /**
  * Drush Command: drush unset-fu
- * Unset `forward_uri` field to an empty array
+ * Sets `forward_uri` field to an empty array
  */
 function drush_orb_unset_forward_uri() {
 
