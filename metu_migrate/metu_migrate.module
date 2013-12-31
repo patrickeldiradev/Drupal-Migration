@@ -119,7 +119,7 @@ function metu_migrate_user_groups_taxonomy($common_arguments) {
   $args = $common_arguments + array(
       'description' => t('Migration of user groups terms'),
       'machine_name' => 'UGTaxMigration',
-      'source_vocabulary' => '5', // vid of the Drupal 6 “Categories” vocabulary
+      'source_vocabulary' => '5', // vid of the Drupal 6 vocabulary
       'destination_vocabulary' => 'featured_slider',
     );
 
@@ -133,7 +133,7 @@ function metu_migrate_researchers_taxonomy($common_arguments) {
   $args = $common_arguments + array(
       'description' => t('Migration of researchers terms'),
       'machine_name' => 'ResTaxMigration',
-      'source_vocabulary' => '7', // vid of the Drupal 6 “Categories” vocabulary
+      'source_vocabulary' => '7', // vid of the Drupal 6 vocabulary
       'destination_vocabulary' => 'researchers',
     );
 
