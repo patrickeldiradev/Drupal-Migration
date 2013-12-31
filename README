@@ -7,3 +7,4 @@ Possible module conversions:
 
 Problems:
 - When Date Popup is used, related field does not updated with correct data from the database
+- After deleting some content types, SQL query changes and Drush module should be updated to fit these changes.
