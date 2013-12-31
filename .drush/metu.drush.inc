@@ -17,6 +17,13 @@ function metu_drush_command() {
       'nid' => 'Node ID to load',
     ),
   );
+  $items['metu-convert-video-content'] = array(
+    'description' => 'Convert "Video Content" Content Type',
+    'alias' => array('metu-cvc'),
+    'arguments' => array(
+      'lang' => 'Language of the node, like "en" or "tr" (without quotes)',
+    ),
+  );
 
   return $items;
 }
@@ -210,5 +217,79 @@ function drush_metu_load_node($nid=0) {
     var_dump($node);
 
   }
+
+}
+
+function drush_metu_convert_video_content($lang='en') {
+
+  // We are setting up the language of the nodes in consideration
+  if (isset($lang)) {
+
+    $current_lang = $lang;
+
+  } else {
+
+    // Probably this error message won't be printed in any case.
+    drush_set_error('error', t('Specify language to continue'));
+
+  }
+
+  // We cheated and used the queries from the Views module :-)
+  $fs_nodes = db_query("
+      SELECT DISTINCT(node.nid) AS nid,
+        node_data_field_embedcode.field_embedcode_value AS node_data_field_embedcode_field_embedcode_value,
+        node_data_field_embedcode.field_embedcode_format AS node_data_field_embedcode_field_embedcode_format,
+        node.language AS node_language,
+        node.type AS node_type,
+        node.vid AS node_vid,
+        node.created AS node_created
+      FROM node node
+      LEFT JOIN content_type_video_content node_data_field_embedcode
+        ON node.vid = node_data_field_embedcode.vid
+      WHERE (node.status = 1)
+        AND (node.type = '%s')
+        AND (node.language = '%s')
+      GROUP BY nid
+      ORDER BY node_created DESC
+      ", array('video_content', $current_lang)
+  );
+
+  // Counters are only for information
+  $count_updated_video_embed_fields = 0;
+  $count_not_updated_video_embed_fields = 0;
+
+  foreach ($fs_nodes as $fsn) { // foreach start $fs_nodes
+
+    // It is better to open the node at the start
+    $node = node_load(array("nid" => $fsn['nid']));
+
+    // Match Youtube link code. Ex: xsaFXx3jKJY
+    preg_match('~http[s]?\://[[w]{3}[\.]]?youtube\.com/embed/(.*)(?:\?)~', $fsn['node_data_field_embedcode_field_embedcode_value'], $matches);
+
+
+    if (!empty($matches)) { // start $matches check
+
+      // Fill Video Embed field
+      $node->field_video_embed[0]['value'] = 'http://www.youtube.com/watch?v=' . $matches[1];
+      $count_updated_video_embed_fields++;
+
+    } else { // other conditions in $matches check
+
+      // When Youtube is not found, increase counter and print a message about it. Note that, this counter should always be zero.
+      drush_print('Problem with node: ' . $node->nid);
+      $count_not_updated_video_embed_fields++;
+
+    } // end $matches check
+
+    // We can save the node right now
+    node_save($node);
+
+  } // foreach end $fs_nodes
+
+
+  // Print collected information
+  echo "\n";
+  drush_print('Count of updated nodes: ' . $count_updated_video_embed_fields);
+  drush_print('Count of nodes that are not updated: ' . $count_not_updated_video_embed_fields);
 
 }
