@@ -42,7 +42,7 @@ function metu_migrate_flush_caches() {
 function metu_migrate_featured_slider($common_arguments) {
 
   $args = $common_arguments + array(     
-    'description' => t('Migrate featured slider nodes'),
+    'description' => t('Import featured slider nodes from Drupal 6'),
     'machine_name' => 'FSMigration', // Call name of this migration through this module
     'source_type' => 'featured_slider',
     'destination_type' => 'featured_slider',
@@ -58,7 +58,7 @@ function metu_migrate_featured_slider($common_arguments) {
 function metu_migrate_video_content($common_arguments) {
 
   $args = $common_arguments + array(
-      'description' => t('Migrate video content nodes'),
+      'description' => t('Import video content nodes from Drupal 6'),
       'machine_name' => 'VCMigration', // Call name of this migration through this module
       'source_type' => 'video_content',
       'destination_type' => 'video',
@@ -74,7 +74,7 @@ function metu_migrate_video_content($common_arguments) {
 function metu_migrate_page($common_arguments) {
 
   $args = $common_arguments + array(     
-    'description' => t('Migrate page nodes'),
+    'description' => t('Import page nodes from Drupal 6'),
     'machine_name' => 'PageMigration', // Call name of this migration through this module
     'source_type' => 'page',
     'destination_type' => 'page',
@@ -90,7 +90,7 @@ function metu_migrate_page($common_arguments) {
 function metu_migrate_researchers($common_arguments) {
 
   $args = $common_arguments + array(
-      'description' => t('Migrate researchers nodes'),
+      'description' => t('Import researchers nodes from Drupal 6'),
       'machine_name' => 'ResearchersMigration', // Call name of this migration through this module
       'source_type' => 'interview_anouncements',
       'destination_type' => 'researchers_page',
@@ -107,7 +107,7 @@ function metu_migrate_researchers($common_arguments) {
 function metu_migrate_files($common_arguments) {
 
   $args = $common_arguments + array(
-    'description' => t('File migration'),
+    'description' => t('Import files from Drupal 6'),
     'machine_name' => 'FileMigration',
     'source_dir' => 'http://gercek.metu.edu.tr', // We will retrieve all data using the domain name. It is much more easier.
     'destination_dir' => 'private://', // It is possible to change it to any directory name. It is also possible to use "public://" shortcut
@@ -122,7 +122,7 @@ function metu_migrate_files($common_arguments) {
 function metu_migrate_users($common_arguments) {
 
   $args = $common_arguments + array(
-    'description' => t('User Migration'),
+    'description' => t('Import users from Drupal 6'),
     'machine_name' => 'UserMigration',
   );
  
