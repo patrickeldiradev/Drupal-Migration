@@ -24,7 +24,11 @@ function metu_migrate_flush_caches() {
     'source_connection' => 'source'
   );
   
-  // We should do Performance->Clear All Caches or "drush cc all" to enable migration options in the Content menu
+  /**
+   * We should do Performance->Clear All Caches or "drush cc all" to enable migration options in the Content menu
+   * Please note, migrate module uses hook_migrate_api() to handle migrations but migrate_d2d works like below
+   * In this module hook == metu_migrate
+   */
   metu_migrate_featured_slider($common_arguments);
   metu_migrate_video_content($common_arguments);
   metu_migrate_page($common_arguments);
