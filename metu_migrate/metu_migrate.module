@@ -222,6 +222,23 @@ class METUPageNodeMigrator extends DrupalNode6Migration {
 
 }
 
+class METUResearchersNodeMigrator extends DrupalNode6Migration {
+
+  public function __construct(array $arguments) {
+
+    // Call parent method
+    parent::__construct($arguments);
+
+    // Image Fields
+    $this->addFieldMapping('field_research_cover_image', 'field_image_research')->sourceMigration('FileMigration');
+    $this->addFieldMapping('field_research_cover_image:file_class')->defaultValue('MigrateFileFid');
+
+    /* We are not migrating File Fields in this content type */
+
+  }
+
+}
+
 // Overriding File Migration class
 class METUFileMigrator extends DrupalFile6Migration {
   
