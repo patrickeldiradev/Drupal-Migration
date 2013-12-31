@@ -48,15 +48,15 @@ It is possible to use this module inside _Migrate UI_ or _Drush_.
 __How can I download the code in Windows?__
 
 * Solution 1:
-    - Download and install [msysgit](http://msysgit.github.io/).
-    - Set up the paths to include _git_ command.
+    - Download and install "[msysgit](http://msysgit.github.io/)".
+    - Set up the paths to include _"git"_ command.
     - Change to your desired directory.
-    - Use _git clone https://github.com/orbingol/migration.git_ command from CLI.
-    - You can see the code inside _migration_ subdirectory.
+    - Use _"git clone https://github.com/orbingol/migration.git"_ command from CLI.
+    - You can see the code inside _"migration"_ subdirectory.
 * Solution 2:
-    * Use a free and good-looking program like [Atlassian SourceTree](http://www.sourcetreeapp.com/).
+    * Use a free and good-looking program like "[Atlassian SourceTree](http://www.sourcetreeapp.com/)".
     * SourceTree also works in Mac.
 
 __How can I download the code in Linux?__
 
-* Use _git_ package coming from your distro and then clone the repository.
+* Use _"git"_ package coming from your distro and then clone the repository.
