@@ -18,6 +18,8 @@ You can use following commands by installing the Drush module:
 * `drush convert-vc {lang}` where `{lang}` is `en` or `tr`. Defaults to `en`. (processes "video content" nodes and splits fields into ones that can be transferable)
 * `drush fix-tr` (fixes translation match problem, migrate_d2d does not correctly map *tnid* values)
 * `drush del-tax` (removes statically defined taxonomy term from nodes)
+* `drush fix-fws` (converts `forward_uri` fields to `forward_to` fields for redirection)
+* `drush unset-fu` (sets `forward_uri` field to an empty array)
 
 ## Using orb_migrate Module ##
 
