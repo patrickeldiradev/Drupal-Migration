@@ -35,8 +35,8 @@ function metu_migrate_flush_caches() {
   metu_migrate_researchers($common_arguments);
   metu_migrate_files($common_arguments);
   metu_migrate_users($common_arguments);
-  metu_migrate_menus($common_arguments);
-  metu_migrate_menu_links($common_arguments);
+  /*metu_migrate_menus($common_arguments);
+  metu_migrate_menu_links($common_arguments);*/
   metu_migrate_user_groups_taxonomy($common_arguments);
   metu_migrate_researchers_taxonomy($common_arguments);
 
@@ -135,6 +135,7 @@ function metu_migrate_users($common_arguments) {
 
 }
 
+/*
 // Menu migration
 function metu_migrate_menus($common_arguments) {
 
@@ -170,7 +171,7 @@ function metu_migrate_menu_links($common_arguments) {
   Migration::registerMigration('DrupalMenuLinks6Migration', $args['machine_name'], $args);
 
 }
-
+*/
 
 // Taxonomy migrations
 function metu_migrate_user_groups_taxonomy($common_arguments) {
