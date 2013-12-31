@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Implementation of hook_drush_command()
+ */
 function metu_drush_command() {
 
   $items = array();
@@ -32,10 +35,9 @@ function metu_drush_command() {
   return $items;
 }
 
-/*
+/**
  * Drush Command: drush convert-fs $lang (default $lang = en)
  * Updates "Featured Slider" content type with the body of the local linked page
- *
  */
 function drush_metu_convert_featured_slider($lang='en') {
 
@@ -209,10 +211,9 @@ function drush_metu_convert_featured_slider($lang='en') {
 
 }
 
-/*
+/**
  * Drush Command: drush load-node $nid
  * Loads node by its ID and dumps the node variables
- *
  */
 function drush_metu_load_node($nid=0) {
 
@@ -229,10 +230,9 @@ function drush_metu_load_node($nid=0) {
 
 }
 
-/*
+/**
  * Drush Command: drush convert-vc $lang (default $lang = en)
  * Extracts Youtube link code and updates Video Embed field in "Video Content" content type
- *
  */
 function drush_metu_convert_video_content($lang='en') {
 
@@ -316,10 +316,9 @@ function drush_metu_convert_video_content($lang='en') {
 
 }
 
-/*
+/**
  * Drush Command: drush fix-tr
  * Fixes translation migrations after migrate operations
- *
  */
 function drush_metu_fix_translations() {
 
