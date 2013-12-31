@@ -38,7 +38,7 @@ You can use following commands by installing the Drush module:
 
 It is possible to use this module inside _Migrate UI_ or _Drush_.
 
-* __Migrate UI:__ *Admin Panel -> Content -> Migrate Tab*
+* __Migrate UI:__ *Admin Panel -> Content -> Migrate* tab
 * __Drush:__ _Migrate_ module has several Drush commands. Sticking to the basics:
     - `drush migrate-import --all` (runs all migrations and transfers all data from D6 to D7)
     - `drush migrate-rollback --all` (removes all transferred data from D7 but not from D6)
