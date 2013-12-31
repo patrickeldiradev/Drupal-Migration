@@ -2,5 +2,8 @@ Needed Drupal Modules:
 - Date
 - Calendar (probably optional)
 
+Possible module conversions:
+- SWFUpload -> jQuery File Upload (https://drupal.org/project/jquery_file_upload)
+
 Problems:
 - When Date Popup is used, related field does not updated with correct data from the database
