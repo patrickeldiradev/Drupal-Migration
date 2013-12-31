@@ -401,6 +401,9 @@ function drush_orb_fix_translations() {
   // Print informational messages
   drush_print('Processed node count: ' . $count);
 
+  // IDE throws a warning about it :-)
+  return true;
+
 }
 
 /**
