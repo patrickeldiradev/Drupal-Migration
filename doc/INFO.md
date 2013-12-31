@@ -19,3 +19,7 @@ Drush is on Github! [https://github.com/drush-ops/drush](https://github.com/drus
 ### Git Help ###
 
 [Git Commit Change](http://christoph.ruegg.name/blog/git-howto-revert-a-commit-already-pushed-to-a-remote-reposit.html)
+
+## Git - Clone a branch to a directory ##
+
+`git clone -b my-branch https://username@github.com/username/myproject.git my-project-folder`
