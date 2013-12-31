@@ -19,7 +19,6 @@ function metu_migrate_migrate_api() {
 function metu_migrate_flush_caches() {
 
   // Define all migrations in this function
-  
   $common_arguments = array(
     'source_version' => 6,
     'source_connection' => 'source'
