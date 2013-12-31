@@ -24,6 +24,10 @@ function metu_drush_command() {
       'lang' => 'Language of the node, like "en" or "tr" (without quotes)',
     ),
   );
+  $items['metu-fix-translations'] = array(
+    'description' => 'Fix translations after migration process',
+    'alias' => array('metu-ft'),
+  );
 
   return $items;
 }
@@ -309,5 +313,87 @@ function drush_metu_convert_video_content($lang='en') {
   echo "\n";
   drush_print('Count of updated nodes: ' . $count_updated_video_embed_fields);
   drush_print('Count of nodes that are not updated: ' . $count_not_updated_video_embed_fields);
+
+}
+
+/*
+ * Drush Command: drush fix-tr
+ * Fixes translation migrations after migrate operations
+ *
+ */
+function drush_metu_fix_translations() {
+
+  // We want this function to run only in Drupal 7 and we check using PHP version_compare() function.
+  if (version_compare(VERSION, '7', '<')) {
+
+    drush_set_error('Need Drupal 7 to run');
+    return false;
+
+  }
+
+  // Set the counter for informational purposes
+  $count = 0;
+
+  // Query D6 nodes table (returns stdClass in D7)
+  $old_nodes = Database::getConnection('default', 'source')->query("SELECT DISTINCT(node.nid) AS nid FROM node node WHERE (node.status = 1)");
+
+  // Query translation match table (returns stdClass in D7)
+  $translations = db_query("SELECT tn.source_nid AS source_nid, tn.source_tnid AS source_tnid, tn.dest_nid AS dest_nid FROM aa_translation_nodes tn");
+
+  // It just works right in this way. Otherwise, it is slow to use any kind of iterator.
+  $trs = array();
+  foreach ($translations as $t) {
+
+    if ($t->source_tnid != 0) {
+      $snid = $t->source_nid;
+      $trs[$snid]['snid'] = $t->source_nid;
+      $trs[$snid]['stnid'] = $t->source_tnid;
+      $trs[$snid]['dnid'] = $t->dest_nid;
+    }
+
+  }
+
+  // We want to measure time -starting time-
+  $start_time = time();
+
+  foreach ($old_nodes as $on) {
+
+    $dest_node = $trs[$on->nid]['dnid'];
+
+    $source_translated_id = $trs[$on->nid]['stnid'];
+
+    $final_dest = $trs[$source_translated_id]['dnid'];
+
+    if (!empty($final_dest)) {
+
+      // Load the node
+      $node = node_load($dest_node);
+
+      // Set translation ID of the open node
+      $node->tnid = $final_dest;
+
+      // We want to measure time -ending time-
+      $process_time = time();
+
+      // Print node ID just for printing something to the command line
+      $print_var = 'Processed node' . ' ' . $final_dest . ' ' . 'at the second' . ' ' . ($process_time - $start_time) . ' ' . 'from the start';
+      drush_print($print_var);
+
+      // Increment the counter
+      $count++;
+
+      // We can save the node right now
+      node_save($node);
+
+    } else {
+
+      //drush_print($dest_node);
+
+    }
+
+  }
+
+  // Print informational messages
+  drush_print('Processed node count: ' . $counter);
 
 }
