@@ -207,7 +207,8 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
   public function complete($entity, stdClass $row) {
 
     // Print destination node ID to the command line
-    drush_print(' / Destination node: ' . $entity->nid, 0, null, false);
+    drush_print(' / ');
+    drush_print('Destination node: ' . $entity->nid, 0, null, false);
 
     // Determine forwarded nodes
     if (!empty($entity->field_forward_uri['und'][0]['value'])) {
@@ -266,7 +267,8 @@ class METUVCNodeMigrator extends DrupalNode6Migration {
   public function complete($entity, stdClass $row) {
 
     // Print destination node ID to the command line
-    drush_print(' / Destination node: ' . $entity->nid, 0, null, true);
+    drush_print(' / ');
+    drush_print('Destination node: ' . $entity->nid, 0, null, true);
 
   }
 
