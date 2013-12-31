@@ -29,7 +29,7 @@ function metu_drush_command() {
 }
 
 /*
- * Drush Command: drush convert-fs $lang
+ * Drush Command: drush convert-fs $lang (default $lang = en)
  * Updates "Featured Slider" content type with the body of the local linked page
  *
  */
