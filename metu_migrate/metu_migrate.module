@@ -179,7 +179,7 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
     $this->addFieldMapping('field_expire_date', 'field_expire_date');
 
     // User Groups
-    $this->addFieldMapping('field_user_groups', '5')->sourceMigration('UGTaxMigration');
+    $this->addFieldMapping('field_user_groups', '5')->sourceMigration('UGTaxMigration')->arguments(array('source_type' => 'tid'));
 
   }
 
@@ -232,6 +232,9 @@ class METUResearchersNodeMigrator extends DrupalNode6Migration {
     // Image Fields
     $this->addFieldMapping('field_research_cover_image', 'field_image_research')->sourceMigration('FileMigration');
     $this->addFieldMapping('field_research_cover_image:file_class')->defaultValue('MigrateFileFid');
+
+    // Research Term
+    $this->addFieldMapping('field_user_groups', '7')->sourceMigration('UGTaxMigration')->arguments(array('source_type' => 'tid'));
 
     // We are not migrating File Fields in this content type
     $this->addUnmigratedSources(array(
