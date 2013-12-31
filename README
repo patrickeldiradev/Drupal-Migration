@@ -1,6 +1,10 @@
-Needed Drupal Modules:
-- Date
-- Calendar (probably optional)
+Needed Drupal 6 modules:
+- date
+- calendar (probably optional)
+
+Needed Drupal 7 modules:
+- migrate
+- migrate_d2d
 
 Possible module conversions:
 - SWFUpload -> jQuery File Upload (https://drupal.org/project/jquery_file_upload)
