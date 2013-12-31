@@ -1,8 +1,8 @@
 <?php
 
 /**
-* Implementation of hook_migrate_api().
-*/
+ * Implementation of hook_migrate_api()
+ */
 function metu_migrate_migrate_api() {
   
   // We may not need to define this but the tutorials defined such a method, so we did.
@@ -14,8 +14,8 @@ function metu_migrate_migrate_api() {
 }
 
 /**
-* Implementation of hook_flush_caches().
-*/
+ * Implementation of hook_flush_caches()
+ */
 function metu_migrate_flush_caches() {
 
   // Define all migrations in this function
