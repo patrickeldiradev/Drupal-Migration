@@ -31,7 +31,8 @@ function metu_migrate_flush_caches() {
   metu_migrate_page($common_arguments);
   metu_migrate_files($common_arguments);
   metu_migrate_users($common_arguments);
-  metu_migrate_taxonomy($common_arguments);
+  metu_migrate_user_groups_taxonomy($common_arguments);
+  metu_migrate_researchers_taxonomy($common_arguments);
 }  
 
 function metu_migrate_featured_slider($common_arguments) {
@@ -102,6 +103,34 @@ function metu_migrate_users($common_arguments) {
  
   // Call Drupal-to-Drupal Migration module (using native class)
   Migration::registerMigration($migration_class="DrupalUser6Migration", $args['machine_name'], $args);
+}
+
+function metu_migrate_user_groups_taxonomy($common_arguments) {
+
+  $args = $common_arguments + array(
+      'description' => t('Migration of user groups terms'),
+      'machine_name' => 'UGTaxMigration',
+      'source_vocabulary' => '5', // vid of the Drupal 6 “Categories” vocabulary
+      'destination_vocabulary' => 'featured_slider',
+    );
+
+  // Call Drupal-to-Drupal Migration module (using native class)
+  Migration::registerMigration('DrupalTerm6Migration', $args['machine_name'], $args);
+
+}
+
+function metu_migrate_researchers_taxonomy($common_arguments) {
+
+  $args = $common_arguments + array(
+      'description' => t('Migration of researchers terms'),
+      'machine_name' => 'ResTaxMigration',
+      'source_vocabulary' => '7', // vid of the Drupal 6 “Categories” vocabulary
+      'destination_vocabulary' => 'researchers',
+    );
+
+  // Call Drupal-to-Drupal Migration module (using native class)
+  Migration::registerMigration('DrupalTerm6Migration', $args['machine_name'], $args);
+
 }
 
 // Overriding Node Migration classes
