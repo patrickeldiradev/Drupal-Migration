@@ -46,7 +46,7 @@ function metu_migrate_flush_caches() {
 function metu_migrate_featured_slider($common_arguments) {
 
   $args = $common_arguments + array(     
-    'description' => dt('Import featured slider nodes from Drupal 6'),
+    'description' => t('Import featured slider nodes from Drupal 6'),
     'machine_name' => 'FSMigration', // Call name of this migration through this module
     'source_type' => 'featured_slider',
     'destination_type' => 'featured_slider',
@@ -62,7 +62,7 @@ function metu_migrate_featured_slider($common_arguments) {
 function metu_migrate_video_content($common_arguments) {
 
   $args = $common_arguments + array(
-      'description' => dt('Import video content nodes from Drupal 6'),
+      'description' => t('Import video content nodes from Drupal 6'),
       'machine_name' => 'VCMigration', // Call name of this migration through this module
       'source_type' => 'video_content',
       'destination_type' => 'video',
@@ -78,7 +78,7 @@ function metu_migrate_video_content($common_arguments) {
 function metu_migrate_page($common_arguments) {
 
   $args = $common_arguments + array(     
-    'description' => dt('Import page nodes from Drupal 6'),
+    'description' => t('Import page nodes from Drupal 6'),
     'machine_name' => 'PageMigration', // Call name of this migration through this module
     'source_type' => 'page',
     'destination_type' => 'page',
@@ -94,7 +94,7 @@ function metu_migrate_page($common_arguments) {
 function metu_migrate_researchers($common_arguments) {
 
   $args = $common_arguments + array(
-      'description' => dt('Import researchers nodes from Drupal 6'),
+      'description' => t('Import researchers nodes from Drupal 6'),
       'machine_name' => 'ResearchersMigration', // Call name of this migration through this module
       'source_type' => 'interview_anouncements',
       'destination_type' => 'researchers_page',
@@ -111,7 +111,7 @@ function metu_migrate_researchers($common_arguments) {
 function metu_migrate_files($common_arguments) {
 
   $args = $common_arguments + array(
-    'description' => dt('Import files from Drupal 6'),
+    'description' => t('Import files from Drupal 6'),
     'machine_name' => 'FileMigration',
     'source_dir' => 'http://gercek.metu.edu.tr', // We will retrieve all data using the domain name. It is much more easier.
     'destination_dir' => 'private://', // It is possible to change it to any directory name. It is also possible to use "public://" shortcut
@@ -126,7 +126,7 @@ function metu_migrate_files($common_arguments) {
 function metu_migrate_users($common_arguments) {
 
   $args = $common_arguments + array(
-    'description' => dt('Import users from Drupal 6'),
+    'description' => t('Import users from Drupal 6'),
     'machine_name' => 'UserMigration',
   );
  
@@ -139,7 +139,7 @@ function metu_migrate_users($common_arguments) {
 function metu_migrate_menus($common_arguments) {
 
   $args = $common_arguments + array(
-      'description' => dt('Import Drupal 6 menus'),
+      'description' => t('Import Drupal 6 menus'),
       'machine_name' => 'MenuMigration',
     );
 
@@ -151,7 +151,7 @@ function metu_migrate_menus($common_arguments) {
 function metu_migrate_menu_links($common_arguments) {
 
   $args = $common_arguments + array(
-      'description' => dt('Import Drupal 6 menu links'),
+      'description' => t('Import Drupal 6 menu links'),
       'machine_name' => 'MenuLinkMigration',
       'menu_migration' => 'MenuMigration',
       'node_migrations' => array('FSMigration', 'VCMigration', 'PageMigration', 'ResearchersMigration'),
@@ -167,7 +167,7 @@ function metu_migrate_menu_links($common_arguments) {
 function metu_migrate_user_groups_taxonomy($common_arguments) {
 
   $args = $common_arguments + array(
-      'description' => dt('Migration of user groups terms'),
+      'description' => t('Migration of user groups terms'),
       'machine_name' => 'UGTaxMigration',
       'source_vocabulary' => '5', // vid of the Drupal 6 vocabulary
       'destination_vocabulary' => 'featured_slider',
@@ -181,7 +181,7 @@ function metu_migrate_user_groups_taxonomy($common_arguments) {
 function metu_migrate_researchers_taxonomy($common_arguments) {
 
   $args = $common_arguments + array(
-      'description' => dt('Migration of researchers terms'),
+      'description' => t('Migration of researchers terms'),
       'machine_name' => 'ResTaxMigration',
       'source_vocabulary' => '7', // vid of the Drupal 6 vocabulary
       'destination_vocabulary' => 'researchers',
@@ -242,13 +242,13 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
 
     // Print destination node ID to the command line
     drush_print(' / ', 0, null, false);
-    drush_print(dt('Destination node') . ': ' . $entity->nid, 0, null, false);
+    drush_print(t('Destination node') . ': ' . $entity->nid, 0, null, false);
 
     // Determine forwarded nodes
     if (!empty($entity->field_forward_uri['und'][0]['value'])) {
 
       // If Forward URI is not empty, print a message about it
-      drush_print(dt('(Forward enabled)'), 2, null, true);
+      drush_print(t('(Forward enabled)'), 2, null, true);
 
     } else {
 
@@ -287,7 +287,7 @@ class METUVCNodeMigrator extends DrupalNode6Migration {
   public function prepare($node, stdClass $row) {
 
     // Print source node ID to the command line
-    drush_print(dt('VC Source node') . ': ' . $row->nid, 2, null, false);
+    drush_print(t('VC Source node') . ': ' . $row->nid, 2, null, false);
 
     // Set Expire Date Field ($node is D7, $row is D6 side)
     $node->field_video_embed['und'][0]['video_url'] = $row->field_video_embed;
@@ -302,7 +302,7 @@ class METUVCNodeMigrator extends DrupalNode6Migration {
 
     // Print destination node ID to the command line
     drush_print(' / ', 0, null, false);
-    drush_print(dt('Destination node') . ': ' . $entity->nid, 0, null, true);
+    drush_print(t('Destination node') . ': ' . $entity->nid, 0, null, true);
 
   }
 
