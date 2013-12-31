@@ -14,6 +14,7 @@ This module is capable of doing
 * Taxonomy
 * File
 * User
+* Menu
 
 migrations while processing dependencies between these elements.
 
@@ -24,13 +25,13 @@ Content types with related fields and taxonomy vocabularies should be created be
 
 ### For Drupal 6 ###
 
-* Date
-* Calendar (optional)
+* [Date](https://drupal.org/project/date)
+* [Calendar](https://drupal.org/project/calendar) (optional)
 
 ### For Drupal 7 ###
 
-* Migrate
-* Drupal-to-Drupal Data Migration (migrate_d2d)
+* [Migrate](https://drupal.org/project/migrate) (tested for version 2.5)
+* [Drupal-to-Drupal Data Migration](https://drupal.org/project/migrate_d2d) (tested for version 2.0)
 
 
 ## Notes ##
