@@ -15,3 +15,7 @@ Drush is on Github! [https://github.com/drush-ops/drush](https://github.com/drus
 [Module Developer's Guide](https://drupal.org/developing/modules)
 [Migrate](https://drupal.org/migrate)
 [Drupal-to-Drupal Data Migration](https://drupal.org/node/1813498)
+
+### Git Help ###
+
+[Git Commit Change](http://christoph.ruegg.name/blog/git-howto-revert-a-commit-already-pushed-to-a-remote-reposit.html)
