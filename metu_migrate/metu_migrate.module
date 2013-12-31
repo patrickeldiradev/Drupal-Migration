@@ -363,6 +363,8 @@ class METUFileMigrator extends DrupalFile6Migration {
    * Constructor method
    */
   public function __construct(array $arguments) {
+
+    // Call parent method
     parent::__construct($arguments);
 
     // Due to the structure of the data in our database, we have to use a callback and this is the only way.
