@@ -232,13 +232,13 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
    * prepare() method from Migrate module
    * Runs before node_save operation
    */
-  public function prepare($node, stdClass $row) {
+  public function prepare($entity, stdClass $source_row) {
 
     // Print source node ID to the command line
-    drush_print('FS Source node: ' . $row->nid, 2, null, false);
+    drush_print('FS Source node: ' . $source_row->nid, 2, null, false);
 
     // Set Expire Date Field ($node is D7, $row is D6 side)
-    $node->field_expire_date['und'][0]['value'] = $row->field_expire_date;
+    $entity->field_expire_date['und'][0]['value'] = $source_row->field_expire_date;
 
   }
 
@@ -246,7 +246,7 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
    * complete() method from Migrate module
    * Runs after node_save operation
    */
-  public function complete($entity, stdClass $row) {
+  public function complete($entity, stdClass $source_row) {
 
     // Print destination node ID to the command line
     drush_print(' / ', 0, null, false);
@@ -292,13 +292,13 @@ class METUVCNodeMigrator extends DrupalNode6Migration {
    * prepare() method from Migrate module
    * Runs before node_save operation
    */
-  public function prepare($node, stdClass $row) {
+  public function prepare($entity, stdClass $source_row) {
 
     // Print source node ID to the command line
-    drush_print(t('VC Source node') . ': ' . $row->nid, 2, null, false);
+    drush_print(t('VC Source node') . ': ' . $source_row->nid, 2, null, false);
 
     // Set Expire Date Field ($node is D7, $row is D6 side)
-    $node->field_video_embed['und'][0]['video_url'] = $row->field_video_embed;
+    $entity->field_video_embed['und'][0]['video_url'] = $source_row->field_video_embed;
 
   }
 
@@ -306,7 +306,7 @@ class METUVCNodeMigrator extends DrupalNode6Migration {
    * complete() method from Migrate module
    * Runs after node_save operation
    */
-  public function complete($entity, stdClass $row) {
+  public function complete($entity, stdClass $source_row) {
 
     // Print destination node ID to the command line
     drush_print(' / ', 0, null, false);
