@@ -151,14 +151,20 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
     parent::__construct($arguments);
 
     // Image Fields
-    $this->addFieldMapping('field_image_new', 'field_standart_image')->sourceMigration('FileMigration');
-    $this->addFieldMapping('field_image_new:file_class')->defaultValue('MigrateFileFid');
-    $this->addFieldMapping('field_big_image_new', 'field_big_image')->sourceMigration('FileMigration');
-    $this->addFieldMapping('field_big_image_new:file_class')->defaultValue('MigrateFileFid');
+    $this->addFieldMapping('field_standart_image', 'field_image_new')->sourceMigration('FileMigration');
+    $this->addFieldMapping('field_standart_image:file_class')->defaultValue('MigrateFileFid');
+    $this->addFieldMapping('field_big_image', 'field_big_image_new')->sourceMigration('FileMigration');
+    $this->addFieldMapping('field_big_image:file_class')->defaultValue('MigrateFileFid');
 
     // Forward URI Field
     $this->addFieldMapping('field_forward_uri', 'field_forward_uri');
-    
+
+    // Expire Date Field
+    $this->addFieldMapping('field_expire_date', 'field_expire_date');
+
+    // User Groups
+    $this->addFieldMapping('field_user_groups', '5')->sourceMigration('UGTaxMigration');
+
   }
 
 }
