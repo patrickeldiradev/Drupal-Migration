@@ -49,5 +49,10 @@ Content types with related fields and taxonomy vocabularies should be created be
 
 ## Usage ##
 
-See [USAGE](doc/USAGE.md) for details.
+* Wonder what is all about? See [INFO](doc/INFO.md) file.
+* Want to know how to use this package? See [USAGE](doc/USAGE.md) file.
+
+## License ##
+
+This package is licensed under [APACHE License v2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 
