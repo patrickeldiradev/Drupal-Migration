@@ -392,6 +392,6 @@ function drush_metu_fix_translations() {
   }
 
   // Print informational messages
-  drush_print('Processed node count: ' . $counter);
+  drush_print('Processed node count: ' . $count);
 
 }
