@@ -161,7 +161,7 @@ function metu_migrate_menu_links($common_arguments) {
 
   $args = $common_arguments + array(
       'description' => t('Import Drupal 6 menu links'),
-      'machine_name' => 'MenuLinkMigration',
+      'machine_name' => 'MenuLinksMigration',
       'menu_migration' => 'MenuMigration',
       'node_migrations' => array('FSMigration', 'VCMigration', 'PageMigration', 'ResearchersMigration'),
       'term_migrations' => array('UGTaxMigration', 'ResTaxMigration'),
