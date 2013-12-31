@@ -66,7 +66,11 @@ It is possible to use this module inside _Migrate UI_ or _Drush_.
 
 __Why are you using Drush? All instructions are written for Drush!__
 
-Because it is easy. If you feel uncomfortable with Drush, you can always use conventional methods, i.e. download from website, extract it and put it under related directory.
+* Because it is easy. If you feel uncomfortable with Drush, you can always use conventional methods, i.e. download from website, extract it and put it under related directory.
+
+__The module just does not work!__
+
+* Try clearing the caches from D7's Admin panel or run `drush cc all` from Drupal site root. Both of them does the same thing.
 
 __How can I download the code in Windows?__
 
@@ -78,7 +82,10 @@ __How can I download the code in Windows?__
     - You can see the code inside *migration* subdirectory.
 * Solution 2:
     * Use a free and good-looking program like [Atlassian SourceTree](http://www.sourcetreeapp.com/).
-    * SourceTree also works in Mac.
+        - SourceTree also works in Mac.
+    * [GitHub for Windows](http://windows.github.com/) is also a nice program and it is from GitHub.
+* Solution 3 __(the easiest)__:
+    * Use _Download ZIP_ button on the right side of [this repository's home page](https://github.com/orbingol/migration). 
 
 __How can I download the code in Linux?__
 
