@@ -77,36 +77,43 @@ function drush_metu_convert_featured_slider($lang='en') {
     ", array('page', $current_lang)
   );
 
+  // Initialize counters
   $count_updated_fs_bodies = 0;
+  $count_updated_fs_forward_uri = 0;
   $count_updated_fs_ct = 0;
 
+  // Start iteration of featured slider nodes
   foreach ($fs_nodes as $fsn) {
 
     // It is better to open the node at the start
     $node = node_load(array("nid" => $fsn['nid']));
 
+    // Check for internal links
     preg_match('~^http[s]?\://[[w]{3}[\.]]?metu\.edu\.tr/(.*)~', $fsn['node_data_field_link_field_link_url'], $matches);
 
-    if (!empty($matches)) {
+    if (!empty($matches)) { // start $matches check
 
+      // We need to exclude files
       preg_match('~^sites/default/files/(.*)~', $matches[1], $matches_files);
 
       if (empty($matches_files)) {
 
+        // url_alias table does not store language prefix
         preg_match('~^tr/(.*)~', $matches[1], $matches_lang_tr);
 
-        if (!empty($matches_lang_tr[1])) {
+        if (!empty($matches_lang_tr[1])) { // start $matches_lang_tr check
 
           $lang_prefix = 'tr';
           $alias_path = $matches_lang_tr[1];
 
-        } else {
+        } else { // other conditions in $matches_lang_tr check
 
           $lang_prefix = 'en';
           $alias_path = $matches[1];
 
-        }
+        } // end $matches_lang_tr check
 
+        // Load URL alias using Drupal's internal functtons
         $real_path = drupal_lookup_path('source', $alias_path, $lang_prefix);
 
         $nid_preprocess = explode('/', $real_path);
@@ -114,34 +121,58 @@ function drush_metu_convert_featured_slider($lang='en') {
 
         $body = null;
 
+        // Iterate through page content types to find the correct body value
         foreach ($fs_node_bodies as $fsnb) {
 
-          if ($fsnb['nid'] == $nid) {
+          if ($fsnb['nid'] == $nid) { // start $fsnb['nid'] check
 
             $body = $fsnb['node_revisions_body'];
             break;
 
-          }
+          } else { // other conditions in $fsnb['nid'] check
 
-        }
+            $body = null;
 
-        if ($body != null) {
+          } // end $fsnb['nid'] check
 
+        } // foreach end $fs_node_bodies
+
+        // If we found the body, set featured_slider body value to this value
+        if ($body != null) { // start $body check
+
+          // Fill the body if the link is local
           $node->body = $body;
 
-        } else {
-
-          // just nothing right now
-
-        }
-
+        } // end $body check
 
         // Just to see the count of featured slider nodes which their body is updated.
         $count_updated_fs_bodies++;
 
-      }
+      } // end $matches_files check
 
-    }
+    }  else { // other conditions in $matches check
+
+      // Sometimes it is possible to forgot writing "http" in the links, so check for it
+      preg_match('~^http~', $node->field_link[0]['url'], $matches_links);
+
+      // If "http" is forgotten, add it to the front of the link
+      if (!empty($matches_links)) { // start $matches_links check
+
+        $forward_uri = $node->field_link[0]['url'];
+
+      } else { // other conditions in $matches_links check
+
+        $forward_uri = "http://" . $node->field_link[0]['url'];
+
+      } // end $matches_links check
+
+      // Fill "Forward URI" if the link is external
+      $node->field_forward_uri[0]['url'] = $forward_uri;
+      $node->field_forward_uri[0]['title'] = $node->field_link[0]['title'];
+
+      $count_updated_fs_forward_uri++;
+
+    } // end $matches check
 
     // Update all featured slider nodes' expire date
     $node->field_expire_date[0]['value'] = date('Y-m-d H:i:s', $node->created);
@@ -151,17 +182,19 @@ function drush_metu_convert_featured_slider($lang='en') {
 
     $count_updated_fs_ct++;
 
-  }
+  } // foreach end $fs_nodes
 
+  // Print some information
   echo "\n";
   drush_print('Updated Body Fields: ' . $count_updated_fs_bodies);
+  drush_print('Updated Forward URI Fields: ' . $count_updated_fs_forward_uri);
   drush_print('Updated Featured Slider CTs: ' . $count_updated_fs_ct);
 
 }
 
 /*
  * Drush Command: drush load-node $nid
- * Loads node by its ID
+ * Loads node by its ID and dumps the node variables
  *
  */
 function drush_metu_load_node($nid=0) {
