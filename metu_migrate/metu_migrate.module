@@ -233,8 +233,11 @@ class METUResearchersNodeMigrator extends DrupalNode6Migration {
     $this->addFieldMapping('field_research_cover_image', 'field_image_research')->sourceMigration('FileMigration');
     $this->addFieldMapping('field_research_cover_image:file_class')->defaultValue('MigrateFileFid');
 
-    /* We are not migrating File Fields in this content type */
-
+    // We are not migrating File Fields in this content type
+    $this->addUnmigratedSources(array(
+        'field_file_research',
+      )
+    );
   }
 
 }
