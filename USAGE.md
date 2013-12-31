@@ -32,7 +32,7 @@ You can use following commands by installing the Drush module:
     - Run `drush en migrate` , `drush en migrate_ui` and `drush en migrate_d2d` inside Drupal site root.
 * After installing the required modules, put [orb_migrate](orb_migrate/) directory inside site modules directory. (ex. __sites/default/modules__)
 * Enable **orb_migrate** module from admin panel under **Development** category or use Drush to enable it by `drush en orb_migrate` command inside Drupal site root. (ex. __sites/default/modules__)
-* Run `drush cc all` or *Admin Panel -> Performance -> Clear All Caches* to enable custom migrate_d2d migrations inside metu_migrate module.
+* Run `drush cc all` or *Admin Panel -> Performance -> Clear All Caches* to enable custom migrate_d2d migrations inside orb_migrate module.
     - __NOTE:__ Clearing caches is needed for the migration system to run. It is designed like that by its author. Look *hook_flush_caches()* implementation in the [module file](orb_migrate/orb_migrate.module).
 
 ### Usage ###
