@@ -26,27 +26,44 @@ function metu_migrate_flush_caches() {
   );
   
   // We should do Performance->Clear All Caches or "drush cc all" to enable migration options in the Content menu
-  metu_migrate_bookpage($common_arguments);
+  metu_migrate_featured_slider($common_arguments);
+  metu_migrate_video_content($common_arguments);
   metu_migrate_page($common_arguments);
   metu_migrate_files($common_arguments);
   metu_migrate_users($common_arguments);
-  
+  metu_migrate_taxonomy($common_arguments);
 }  
 
-function metu_migrate_bookpage($common_arguments) {
+function metu_migrate_featured_slider($common_arguments) {
 
   $args = $common_arguments + array(     
-    'description' => 'Migrate book page nodes',
-    'machine_name' => 'BookPageMigration', // Call name of this migration through this module
-    'source_type' => 'book',
-    'destination_type' => 'page',
+    'description' => 'Migrate featured slider nodes',
+    'machine_name' => 'FSMigration', // Call name of this migration through this module
+    'source_type' => 'featured_slider',
+    'destination_type' => 'featured_slider',
     'user_migration' => 'UserMigration', // Migrate users before migrating "book" content type
     'dependencies' => array(),
   );
   
   // Call Drupal-to-Drupal Migration module (using overridden class)
-  Migration::registerMigration($migration_class="METUNodeMigrator", $args['machine_name'], $args);
+  Migration::registerMigration($migration_class="METUFSNodeMigrator", $args['machine_name'], $args);
   
+}
+
+function metu_migrate_video_content($common_arguments) {
+
+  $args = $common_arguments + array(
+      'description' => 'Migrate video content nodes',
+      'machine_name' => 'VCMigration', // Call name of this migration through this module
+      'source_type' => 'video_content',
+      'destination_type' => 'video',
+      'user_migration' => 'UserMigration', // Migrate users before migrating "book" content type
+      'dependencies' => array(),
+    );
+
+  // Call Drupal-to-Drupal Migration module (using overridden class)
+  Migration::registerMigration($migration_class="METUVCNodeMigrator", $args['machine_name'], $args);
+
 }
 
 function metu_migrate_page($common_arguments) {
@@ -61,16 +78,16 @@ function metu_migrate_page($common_arguments) {
   );
   
   // Call Drupal-to-Drupal Migration module (using overridden class)
-  Migration::registerMigration($migration_class="METUNodeMigrator", $args['machine_name'], $args);
+  Migration::registerMigration($migration_class="METUPageNodeMigrator", $args['machine_name'], $args);
   
 }
 
 function metu_migrate_files($common_arguments) {
   $args = $common_arguments + array(
-    'description' => 'File migration.',
+    'description' => 'File migration',
     'machine_name' => 'FileMigration',
     'source_dir' => 'http://gercek.metu.edu.tr', // We will retrieve all data using the domain name. It is much more easier.
-    'destination_dir' => 'private://page', // It is possible to change it to any directory name. It is also possible to use "public://" shortcut
+    'destination_dir' => 'private://', // It is possible to change it to any directory name. It is also possible to use "public://" shortcut
   );
   
   // Call Drupal-to-Drupal Migration module (using overridden class)
@@ -87,19 +104,56 @@ function metu_migrate_users($common_arguments) {
   Migration::registerMigration($migration_class="DrupalUser6Migration", $args['machine_name'], $args);
 }
 
-// Overriding Node Migration class
-class METUNodeMigrator extends DrupalNode6Migration {
+// Overriding Node Migration classes
+class METUFSNodeMigrator extends DrupalNode6Migration {
 
   public function __construct(array $arguments) {
     
     // Call parent method
     parent::__construct($arguments);
-    
-    // After Drushing upload module to filefield module, we can map filefield fields to D7 Field API
-    $this->addFieldMapping('field_attachments', 'field_attachments')->sourceMigration('FileMigration');
-    $this->addFieldMapping('field_attachments:file_class')->defaultValue('MigrateFileFid');
+
+    $this->addFieldMapping('field_image_new', 'field_standart_image')->sourceMigration('FileMigration');
+    $this->addFieldMapping('field_image_new:file_class')->defaultValue('MigrateFileFid');
     
   }
+
+}
+
+class METUVCNodeMigrator extends DrupalNode6Migration {
+
+  public function __construct(array $arguments) {
+
+    // Call parent method
+    parent::__construct($arguments);
+
+    // Video Embed Field
+    $this->addFieldMapping('field_video_embed', 'field_video_embed');
+
+    // Video Thumbnail
+    $this->addFieldMapping('field_video_thumbnail', 'field_video_thumbnail')->sourceMigration('FileMigration');
+    $this->addFieldMapping('field_video_thumbnail:file_class')->defaultValue('MigrateFileFid');
+
+  }
+
+}
+
+class METUPageNodeMigrator extends DrupalNode6Migration {
+
+  public function __construct(array $arguments) {
+
+    // Call parent method
+    parent::__construct($arguments);
+
+    // Extra fields
+    $this->addFieldMapping('field_post_image', 'field_post_image')->sourceMigration('FileMigration');
+    $this->addFieldMapping('field_post_image:file_class')->defaultValue('MigrateFileFid');
+    $this->addFieldMapping('field_other_images', 'field_other_images')->sourceMigration('FileMigration');
+    $this->addFieldMapping('field_other_images:file_class')->defaultValue('MigrateFileFid');
+    $this->addFieldMapping('field_post_files', 'field_post_files')->sourceMigration('FileMigration');
+    $this->addFieldMapping('field_post_files:file_class')->defaultValue('MigrateFileFid');
+
+  }
+
 }
 
 // Overriding File Migration class
