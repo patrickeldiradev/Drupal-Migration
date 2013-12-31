@@ -28,8 +28,10 @@ You can use following commands by installing the Drush module:
 * __NOTE:__ You can also use Drush to download and enable the required modules. If you want to use Drush:
     - Change directory to Drupal sites directory. (ex. __cd ~/wwwhome/drupal/sites/default__ )
     - Using `drush dl migrate` and `drush dl migrate_d2d` commands, download the required modules into custom modules directory. (i.e. __sites/all/modules__)
+        * If you want to migrate date fields, you also need to download Date module using `drush dl date`.
     - Then, go to Drupal site root. (ex. __cd ~/wwwhome/drupal/sites/default__ )
     - Run `drush en migrate` , `drush en migrate_ui` and `drush en migrate_d2d` inside Drupal site root.
+        * For migrating date fields, run `drush en migrate_date`.
 * After installing the required modules, put [orb_migrate](../orb_migrate/) directory inside site modules directory. (ex. __sites/default/modules__)
 * Enable **orb_migrate** module from admin panel under **Development** category or use Drush to enable it by `drush en orb_migrate` command inside Drupal site root. (ex. __sites/default/modules__)
 * Run `drush cc all` or *Admin Panel -> Performance -> Clear All Caches* to enable custom migrate_d2d migrations inside orb_migrate module.
@@ -61,6 +63,10 @@ It is possible to use this module inside _Migrate UI_ or _Drush_.
   * `drush del-tax` to remove defined taxonomy term from defined content types. *Note: Definitions are applied manually to the [orb.drush.php](../.drush/orb.drush.php) file.*
 
 ## Frequently Asked Questions ##
+
+__Why are you using Drush? All instructions are written for Drush!__
+
+Because it is easy. If you feel uncomfortable with Drush, you can always use conventional methods, i.e. download from website, extract it and put it under related directory.
 
 __How can I download the code in Windows?__
 
