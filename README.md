@@ -17,7 +17,7 @@ This module is capable of doing
 
 migrations while processing dependencies between these elements.
 
-Content types with related fields and taxonomy vocabularies should be created before running these migrations but there is no need to create vocabulary terms inside a taxonomy because, migration automatically does term transfer.
+Content types with related fields and taxonomy vocabularies should be created before running these migrations but there is no need to create vocabulary terms inside a taxonomy because, migration automatically transfers the terms.
 
 
 ## Requirements ##
@@ -30,7 +30,7 @@ Content types with related fields and taxonomy vocabularies should be created be
 ### For Drupal 7 ###
 
 * Migrate
-* Drupal-to-Drupal Migration (migrate_d2d)
+* Drupal-to-Drupal Data Migration (migrate_d2d)
 
 
 ## Notes ##
@@ -43,3 +43,4 @@ Content types with related fields and taxonomy vocabularies should be created be
 
 * When Date Popup is used, related field does not updated with correct data from the database. Probably, this is a problem of local testing environment.
 * After deleting some content types, SQL query changes and Drush module should be updated to fit these changes.
+* Delete unwanted taxonomy terms after migration.
