@@ -32,6 +32,8 @@ Content types with related fields and taxonomy vocabularies should be created be
 
 * [Migrate](https://drupal.org/project/migrate) (tested for version 2.5)
 * [Drupal-to-Drupal Data Migration](https://drupal.org/project/migrate_d2d) (tested for version 2.0)
+* [Date](https://drupal.org/project/date)
+  * You need to enable *date_migrate* coming with this module. (The easy way: `drush en date_migrate`) 
 
 
 ## Notes ##
