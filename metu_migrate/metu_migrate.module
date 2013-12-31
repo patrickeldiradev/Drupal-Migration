@@ -173,7 +173,7 @@ class METUVCNodeMigrator extends DrupalNode6Migration {
     // Video Embed Field
     $this->addFieldMapping('field_video_embed', 'field_video_embed');
 
-    // Video Thumbnail
+    // Video Thumbnail Field
     $this->addFieldMapping('field_video_thumbnail', 'field_video_thumbnail')->sourceMigration('FileMigration');
     $this->addFieldMapping('field_video_thumbnail:file_class')->defaultValue('MigrateFileFid');
 
@@ -188,7 +188,7 @@ class METUPageNodeMigrator extends DrupalNode6Migration {
     // Call parent method
     parent::__construct($arguments);
 
-    // Extra fields
+    // Extra Fields
     $this->addFieldMapping('field_post_image', 'field_post_image')->sourceMigration('FileMigration');
     $this->addFieldMapping('field_post_image:file_class')->defaultValue('MigrateFileFid');
     $this->addFieldMapping('field_other_images', 'field_other_images')->sourceMigration('FileMigration');
