@@ -85,6 +85,22 @@ function metu_migrate_page($common_arguments) {
   
 }
 
+function metu_migrate_researchers($common_arguments) {
+
+  $args = $common_arguments + array(
+      'description' => 'Migrate researchers nodes',
+      'machine_name' => 'ResearchersMigration', // Call name of this migration through this module
+      'source_type' => 'interview_anouncements',
+      'destination_type' => 'researchers_page',
+      'user_migration' => 'UserMigration', // Migrate users before migrating "page" content type
+      'dependencies' => array(),
+    );
+
+  // Call Drupal-to-Drupal Migration module (using overridden class)
+  Migration::registerMigration($migration_class="METUResearchersNodeMigrator", $args['machine_name'], $args);
+
+}
+
 // File migration
 function metu_migrate_files($common_arguments) {
 
