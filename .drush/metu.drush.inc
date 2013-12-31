@@ -1,6 +1,7 @@
 <?php
 
 function metu_drush_command() {
+
   $items = array();
   $items['metu-convert-featured-slider'] = array(
     'description' => 'Convert Featured Slider Content Type',
