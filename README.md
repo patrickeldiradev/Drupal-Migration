@@ -49,5 +49,5 @@ Content types with related fields and taxonomy vocabularies should be created be
 
 ## Usage ##
 
-See [USAGE](USAGE.md) for details.
+See [USAGE](doc/USAGE.md) for details.
 
