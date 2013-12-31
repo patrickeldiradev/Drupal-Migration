@@ -43,8 +43,8 @@ Content types with related fields and taxonomy vocabularies should be created be
 ### Problems & Solutions ###
 
 * When Date Popup is used, related field does not updated with correct data from the database. Probably, this is a problem of local testing environment.
-* After deleting some content types, SQL query changes and Drush module should be updated to fit these changes.
-* Delete unwanted taxonomy terms after migration.
+* ~~After deleting some content types, SQL query changes and Drush module should be updated to fit these changes.~~
+* ~~Delete unwanted taxonomy terms after migration.~~
 * ~~Do not use menu migration, because some menus are not planned for transfer.~~
 
 ## Usage ##
