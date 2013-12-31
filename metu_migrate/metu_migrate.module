@@ -113,7 +113,7 @@ function metu_migrate_files($common_arguments) {
   $args = $common_arguments + array(
     'description' => t('Import files from Drupal 6'),
     'machine_name' => 'FileMigration',
-    'source_dir' => 'http://gercek.metu.edu.tr', // We will retrieve all data using the domain name. It is much more easier.
+    'source_dir' => 'http://gercek.metu.edu.tr/sites/default/files/', // We will retrieve all data using the domain name. It is much more easier.
     'destination_dir' => 'private://', // It is possible to change it to any directory name. It is also possible to use "public://" shortcut
   );
   
