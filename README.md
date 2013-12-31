@@ -1,9 +1,8 @@
-# Drupal Module for Migration from D6 to D7 #
+# Migration Module for Drupal #
 
 ## Introduction ##
-- - -
 
-This repository contains a Drush module and migrate_d2d module for migrating from D6 to D7.
+This repository contains a Drush module and migrate_d2d module for migration from D6 to D7.
 
 __Drush Module__ : This module is used for converting some several fields to another separate fields in a content type. This separation operation makes field-to-field migration easy.
 __Migrate Module__ : This module is the main migration module.
@@ -21,7 +20,6 @@ Content types with related fields and taxonomy vocabularies should be created be
 
 
 ## Requirements ##
-- - -
 
 ### For Drupal 6 ###
 
@@ -35,7 +33,6 @@ Content types with related fields and taxonomy vocabularies should be created be
 
 
 ## Notes ##
-- - -
 
 ### Module Changes ###
 
