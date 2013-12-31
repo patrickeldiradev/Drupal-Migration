@@ -1,2 +1,2 @@
 <?php
-$options['shell-aliases']['convert_fs'] = 'metu-convert-featured-slider';
+$options['shell-aliases']['convert-fs'] = 'metu-convert-featured-slider';
