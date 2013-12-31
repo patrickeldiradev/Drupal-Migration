@@ -161,6 +161,9 @@ function metu_migrate_researchers_taxonomy($common_arguments) {
 // Overriding Node Migration classes
 class METUFSNodeMigrator extends DrupalNode6Migration {
 
+  /**
+   * Constructor method
+   */
   public function __construct(array $arguments) {
     
     // Call parent method
@@ -186,7 +189,6 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
   /**
    * prepare() method from Migrate module
    * Runs before node_save operation
-   *
    */
   public function prepare($node, stdClass $row) {
 
@@ -201,7 +203,6 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
   /**
    * complete() method from Migrate module
    * Runs after node_save operation
-   *
    */
   public function complete($entity, stdClass $row) {
 
@@ -227,6 +228,9 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
 
 class METUVCNodeMigrator extends DrupalNode6Migration {
 
+  /**
+   * Constructor method
+   */
   public function __construct(array $arguments) {
 
     // Call parent method
@@ -245,6 +249,9 @@ class METUVCNodeMigrator extends DrupalNode6Migration {
 
 class METUPageNodeMigrator extends DrupalNode6Migration {
 
+  /**
+   * Constructor method
+   */
   public function __construct(array $arguments) {
 
     // Call parent method
@@ -264,6 +271,9 @@ class METUPageNodeMigrator extends DrupalNode6Migration {
 
 class METUResearchersNodeMigrator extends DrupalNode6Migration {
 
+  /**
+   * Constructor method
+   */
   public function __construct(array $arguments) {
 
     // Call parent method
@@ -287,7 +297,10 @@ class METUResearchersNodeMigrator extends DrupalNode6Migration {
 
 // Overriding File Migration class
 class METUFileMigrator extends DrupalFile6Migration {
-  
+
+  /**
+   * Constructor method
+   */
   public function __construct(array $arguments) {
     parent::__construct($arguments);
 
@@ -296,7 +309,10 @@ class METUFileMigrator extends DrupalFile6Migration {
     
   }
   
-  // Callback method for fixing file paths in the database
+  /**
+   * Callback method from Drupal-to-Drupal Data Migration module (override)
+   * Fix file paths in the database
+   */
   public function fixMe($uri) {
   
     $correctedLegacyPath = 'sites/default/files/';
