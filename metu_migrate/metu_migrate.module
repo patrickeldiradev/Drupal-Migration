@@ -141,6 +141,15 @@ function metu_migrate_menus($common_arguments) {
   $args = $common_arguments + array(
       'description' => t('Import Drupal 6 menus'),
       'machine_name' => 'MenuMigration',
+      'dependencies' => array(
+        'FSMigration',
+        'VCMigration',
+        'PageMigration',
+        'ResearchersMigration',
+        'UGTaxMigration',
+        'ResTaxMigration',
+        'FileMigration',
+      ),
     );
 
   Migration::registerMigration('DrupalMenu6Migration', $args['machine_name'], $args);
