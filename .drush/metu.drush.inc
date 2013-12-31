@@ -1,14 +1,5 @@
 <?php
 
-/**
- * Convert node attachments from core 'upload' the cck 'filefield'.
- *
- * see http://drupal.org/node/656204
- */
-
-// The name of your attachment field
-define('ATTACHMENT_FIELD', 'field_attachments');
-
 function metu_drush_command() {
   $items = array();
   $items['metu-convert'] = array(
@@ -111,7 +102,14 @@ function drush_metu_convert_featured_slider() {
 
           $node = node_load(array("nid" => $fsn['nid']));
           $node->body = $body;
+          $date_preprocess = explode('+', date('c', $node->created));
+          $node->field_expire_date[0]['value'] = $date_preprocess[0];
           node_save($node);
+
+          /*
+          $node_test = node_load(array("nid" => $fsn['nid']));
+          var_dump($node_test);
+          */
 
         }
 
