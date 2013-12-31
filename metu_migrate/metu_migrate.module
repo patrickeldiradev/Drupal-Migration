@@ -33,8 +33,10 @@ function metu_migrate_flush_caches() {
   metu_migrate_users($common_arguments);
   metu_migrate_user_groups_taxonomy($common_arguments);
   metu_migrate_researchers_taxonomy($common_arguments);
-}  
 
+}
+
+// Node migrations
 function metu_migrate_featured_slider($common_arguments) {
 
   $args = $common_arguments + array(     
@@ -83,7 +85,9 @@ function metu_migrate_page($common_arguments) {
   
 }
 
+// File migration
 function metu_migrate_files($common_arguments) {
+
   $args = $common_arguments + array(
     'description' => 'File migration',
     'machine_name' => 'FileMigration',
@@ -93,9 +97,12 @@ function metu_migrate_files($common_arguments) {
   
   // Call Drupal-to-Drupal Migration module (using overridden class)
   Migration::registerMigration($migration_class="METUFileMigrator", $args['machine_name'], $args);
+
 }
 
+// User migration
 function metu_migrate_users($common_arguments) {
+
   $args = $common_arguments + array(
     'description' => 'User Migration',
     'machine_name' => 'UserMigration',
@@ -103,8 +110,10 @@ function metu_migrate_users($common_arguments) {
  
   // Call Drupal-to-Drupal Migration module (using native class)
   Migration::registerMigration($migration_class="DrupalUser6Migration", $args['machine_name'], $args);
+
 }
 
+// Taxonomy migrations
 function metu_migrate_user_groups_taxonomy($common_arguments) {
 
   $args = $common_arguments + array(
