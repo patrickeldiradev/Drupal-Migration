@@ -56,6 +56,9 @@ It is possible to use this module inside _Migrate UI_ or _Drush_.
 * Run `drush migrate-import --all`
   * If you have problems, you can rollback migration using `drush migrate-rollback --all`
   * If you added some content to Drupal 6 and want to transfer them to Drupal 7, run `drush migrate-update --all`
+* Under Drupal 7 site root run
+  * `drush fix-tr` to associate translated nodes.
+  * `drush del-tax` to remove defined taxonomy term from defined content types. *Note: Definitions are applied manually to the [orb.drush.php](.drush/orb.drush.php) file.*
 
 ## Frequently Asked Questions ##
 
