@@ -150,8 +150,14 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
     // Call parent method
     parent::__construct($arguments);
 
+    // Image Fields
     $this->addFieldMapping('field_image_new', 'field_standart_image')->sourceMigration('FileMigration');
     $this->addFieldMapping('field_image_new:file_class')->defaultValue('MigrateFileFid');
+    $this->addFieldMapping('field_big_image_new', 'field_big_image')->sourceMigration('FileMigration');
+    $this->addFieldMapping('field_big_image_new:file_class')->defaultValue('MigrateFileFid');
+
+    // Forward URI Field
+    $this->addFieldMapping('field_forward_uri', 'field_forward_uri');
     
   }
 
