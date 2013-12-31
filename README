@@ -1,2 +1,6 @@
 Needed Drupal Modules:
 - Date
+- Calendar (probably optional)
+
+Problems:
+- When Date Popup is used, related field does not updated with correct data from the database
