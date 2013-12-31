@@ -135,7 +135,7 @@ function metu_migrate_users($common_arguments) {
 function metu_migrate_menus($common_arguments) {
 
   $args = $common_arguments + array(
-      'machine_name' => 'MenuMigration',
+      'machine_name' => t('MenuMigration'),
       'description' => t('Import Drupal 6 menus'),
     );
 
@@ -147,7 +147,7 @@ function metu_migrate_menus($common_arguments) {
 function metu_migrate_menu_links($common_arguments) {
 
   $args = $common_arguments + array(
-      'machine_name' => 'MenuLinkMigration',
+      'machine_name' => t('MenuLinkMigration'),
       'description' => t('Import Drupal 6 menu links'),
       'menu_migration' => 'MenuMigration',
       'node_migrations' => array('FSMigration', 'VCMigration', 'PageMigration', 'ResearchersMigration'),
