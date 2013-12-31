@@ -55,6 +55,14 @@ function orb_drush_command() {
     'description' => 'Removes taxonomy terms',
     'alias' => array('orb-rtt'),
   );
+  $items['orb-fix-forwards'] = array(
+    'description' => 'Convert forward_uri field to forward_to field for automatic redirection',
+    'alias' => array('orb-ff'),
+  );
+  $items['orb-unset-forward-uri'] = array(
+    'description' => 'Unset forward_uri field',
+    'alias' => array('orb-ufu'),
+  );
 
   return $items;
 }
@@ -470,3 +478,77 @@ function drush_orb_remove_taxonomy_term() {
   } // foreach end $all_nodes
 
 }
+
+/**
+ * Drush Command: drush fix-fws
+ * Converts `forward_uri` field to `forward_to` field for redirection
+ */
+function drush_orb_fix_forwards() {
+
+  // We want this function to run only in Drupal 7 and we check using PHP version_compare() function.
+  if (version_compare(VERSION, '7', '<')) {
+
+    drush_set_error('Need Drupal 7 to run');
+    return false;
+
+  }
+
+  $nodes = db_query("SELECT nid FROM node WHERE type = 'featured_slider'");
+
+  foreach ($nodes as $n) { // foreach start $nodes
+
+    // Open the node
+    $node = node_load($n->nid);
+
+    // Process when `forward_uri` field is filled
+    if (!empty($node->field_forward_uri)) { // start `forward_uri` field check
+
+      // Set `forward_to` field
+      $forward_uri = $node->field_forward_uri['und'][0]['safe_value'];
+      $node->field_forward_to = array();
+      $node->field_forward_to['und'] = array();
+      $node->field_forward_to['und'][0] = array();
+      $node->field_forward_to['und'][0]['url'] = $forward_uri;
+      $node->field_forward_to['und'][0]['title'] = '';
+      $node->field_forward_to['und'][0]['attributes'] = array();
+
+      // Save the opened node
+      node_save($node);
+
+    } // end `forward_uri` field check
+
+  } // foreach end $nodes
+
+}
+
+/**
+ * Drush Command: drush unset-fu
+ * Unset `forward_uri` field to an empty array
+ */
+function drush_orb_unset_forward_uri() {
+
+  // We want this function to run only in Drupal 7 and we check using PHP version_compare() function.
+  if (version_compare(VERSION, '7', '<')) {
+
+    drush_set_error('Need Drupal 7 to run');
+    return false;
+
+  }
+
+  $nodes = db_query("SELECT nid FROM node WHERE type = 'featured_slider'");
+
+  foreach ($nodes as $n) { // foreach start $nodes
+
+    // Open the node
+    $node = node_load($n->nid);
+
+    // Process when `forward_uri` field is filled
+    unset($node->field_forward_uri);
+
+    // Save the opened node
+    node_save($node);
+
+  } // foreach end $nodes
+
+}
+
