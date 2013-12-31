@@ -219,7 +219,7 @@ function drush_metu_load_node($nid=0) {
   } else {
 
     $node = node_load(array("nid" => $nid));
-    var_dump($node);
+    drush_print_r($node);
 
   }
 
