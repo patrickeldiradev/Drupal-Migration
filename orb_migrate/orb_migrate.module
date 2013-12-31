@@ -3,7 +3,7 @@
 /**
  * Implementation of hook_migrate_api()
  */
-function metu_migrate_migrate_api() {
+function orb_migrate_migrate_api() {
   
   // We may not need to define this but the tutorials defined such a method, so we did.
   $api = array(
@@ -16,7 +16,7 @@ function metu_migrate_migrate_api() {
 /**
  * Implementation of hook_flush_caches()
  */
-function metu_migrate_flush_caches() {
+function orb_migrate_flush_caches() {
 
   // Define all migrations in this function
   $common_arguments = array(
@@ -25,25 +25,25 @@ function metu_migrate_flush_caches() {
   );
   
   /**
-   * We should do Performance->Clear All Caches or "drush cc all" to enable migration options in the Content menu
+   * We should do Performance -> Clear All Caches or "drush cc all" to enable migration options in the Content menu
    * Please note, migrate module uses hook_migrate_api() to handle migrations but migrate_d2d works like below
-   * In this module hook == metu_migrate
+   * In this module hook == orb_migrate
    */
-  metu_migrate_featured_slider($common_arguments);
-  metu_migrate_video_content($common_arguments);
-  metu_migrate_page($common_arguments);
-  metu_migrate_researchers($common_arguments);
-  metu_migrate_files($common_arguments);
-  metu_migrate_users($common_arguments);
-  metu_migrate_menus($common_arguments);
-  metu_migrate_menu_links($common_arguments);
-  metu_migrate_user_groups_taxonomy($common_arguments);
-  metu_migrate_researchers_taxonomy($common_arguments);
+  orb_migrate_featured_slider($common_arguments);
+  orb_migrate_video_content($common_arguments);
+  orb_migrate_page($common_arguments);
+  orb_migrate_researchers($common_arguments);
+  orb_migrate_files($common_arguments);
+  orb_migrate_users($common_arguments);
+  orb_migrate_menus($common_arguments);
+  orb_migrate_menu_links($common_arguments);
+  orb_migrate_user_groups_taxonomy($common_arguments);
+  orb_migrate_researchers_taxonomy($common_arguments);
 
 }
 
 // Node migrations
-function metu_migrate_featured_slider($common_arguments) {
+function orb_migrate_featured_slider($common_arguments) {
 
   $args = $common_arguments + array(     
     'description' => t('Import featured slider nodes from Drupal 6'),
@@ -55,11 +55,11 @@ function metu_migrate_featured_slider($common_arguments) {
   );
   
   // Call Drupal-to-Drupal Migration module (using overridden class)
-  Migration::registerMigration($migration_class="METUFSNodeMigrator", $args['machine_name'], $args);
+  Migration::registerMigration($migration_class="ORBFSNodeMigrator", $args['machine_name'], $args);
   
 }
 
-function metu_migrate_video_content($common_arguments) {
+function orb_migrate_video_content($common_arguments) {
 
   $args = $common_arguments + array(
       'description' => t('Import video content nodes from Drupal 6'),
@@ -71,11 +71,11 @@ function metu_migrate_video_content($common_arguments) {
     );
 
   // Call Drupal-to-Drupal Migration module (using overridden class)
-  Migration::registerMigration($migration_class="METUVCNodeMigrator", $args['machine_name'], $args);
+  Migration::registerMigration($migration_class="ORBVCNodeMigrator", $args['machine_name'], $args);
 
 }
 
-function metu_migrate_page($common_arguments) {
+function orb_migrate_page($common_arguments) {
 
   $args = $common_arguments + array(     
     'description' => t('Import page nodes from Drupal 6'),
@@ -87,11 +87,11 @@ function metu_migrate_page($common_arguments) {
   );
   
   // Call Drupal-to-Drupal Migration module (using overridden class)
-  Migration::registerMigration($migration_class="METUPageNodeMigrator", $args['machine_name'], $args);
+  Migration::registerMigration($migration_class="ORBPageNodeMigrator", $args['machine_name'], $args);
   
 }
 
-function metu_migrate_researchers($common_arguments) {
+function orb_migrate_researchers($common_arguments) {
 
   $args = $common_arguments + array(
       'description' => t('Import researchers nodes from Drupal 6'),
@@ -103,27 +103,27 @@ function metu_migrate_researchers($common_arguments) {
     );
 
   // Call Drupal-to-Drupal Migration module (using overridden class)
-  Migration::registerMigration($migration_class="METUResearchersNodeMigrator", $args['machine_name'], $args);
+  Migration::registerMigration($migration_class="ORBUResearchersNodeMigrator", $args['machine_name'], $args);
 
 }
 
 // File migration
-function metu_migrate_files($common_arguments) {
+function orb_migrate_files($common_arguments) {
 
   $args = $common_arguments + array(
     'description' => t('Import files from Drupal 6'),
     'machine_name' => 'FileMigration',
-    'source_dir' => 'http://gercek.metu.edu.tr/', // We will retrieve all data using the domain name. It is much more easier.
+    'source_dir' => 'http://www.example.com/', // We will retrieve all data using the domain name. It is much more easier.
     'destination_dir' => 'private://', // It is possible to change it to any directory name. It is also possible to use "public://" shortcut
   );
   
   // Call Drupal-to-Drupal Migration module (using overridden class)
-  Migration::registerMigration($migration_class="METUFileMigrator", $args['machine_name'], $args);
+  Migration::registerMigration($migration_class="ORBFileMigrator", $args['machine_name'], $args);
 
 }
 
 // User migration
-function metu_migrate_users($common_arguments) {
+function orb_migrate_users($common_arguments) {
 
   $args = $common_arguments + array(
     'description' => t('Import users from Drupal 6'),
@@ -136,7 +136,7 @@ function metu_migrate_users($common_arguments) {
 }
 
 // Menu migration
-function metu_migrate_menus($common_arguments) {
+function orb_migrate_menus($common_arguments) {
 
   $args = $common_arguments + array(
       'description' => t('Import Drupal 6 menus'),
@@ -157,7 +157,7 @@ function metu_migrate_menus($common_arguments) {
 }
 
 // Menu Links migration
-function metu_migrate_menu_links($common_arguments) {
+function orb_migrate_menu_links($common_arguments) {
 
   $args = $common_arguments + array(
       'description' => t('Import Drupal 6 menu links'),
@@ -172,7 +172,7 @@ function metu_migrate_menu_links($common_arguments) {
 }
 
 // Taxonomy migrations
-function metu_migrate_user_groups_taxonomy($common_arguments) {
+function orb_migrate_user_groups_taxonomy($common_arguments) {
 
   $args = $common_arguments + array(
       'description' => t('Migration of user groups terms'),
@@ -186,7 +186,7 @@ function metu_migrate_user_groups_taxonomy($common_arguments) {
 
 }
 
-function metu_migrate_researchers_taxonomy($common_arguments) {
+function orb_migrate_researchers_taxonomy($common_arguments) {
 
   $args = $common_arguments + array(
       'description' => t('Migration of researchers terms'),
@@ -201,7 +201,7 @@ function metu_migrate_researchers_taxonomy($common_arguments) {
 }
 
 // Overriding Node Migration classes
-class METUFSNodeMigrator extends DrupalNode6Migration {
+class ORBFSNodeMigrator extends DrupalNode6Migration {
 
   /**
    * Constructor method
@@ -272,7 +272,7 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
 
 }
 
-class METUVCNodeMigrator extends DrupalNode6Migration {
+class ORBVCNodeMigrator extends DrupalNode6Migration {
 
   /**
    * Constructor method
@@ -322,7 +322,7 @@ class METUVCNodeMigrator extends DrupalNode6Migration {
 
 }
 
-class METUPageNodeMigrator extends DrupalNode6Migration {
+class ORBPageNodeMigrator extends DrupalNode6Migration {
 
   /**
    * Constructor method
@@ -355,7 +355,7 @@ class METUPageNodeMigrator extends DrupalNode6Migration {
 
 }
 
-class METUResearchersNodeMigrator extends DrupalNode6Migration {
+class ORBResearchersNodeMigrator extends DrupalNode6Migration {
 
   /**
    * Constructor method
@@ -382,7 +382,7 @@ class METUResearchersNodeMigrator extends DrupalNode6Migration {
 }
 
 // Overriding File Migration class
-class METUFileMigrator extends DrupalFile6Migration {
+class ORBFileMigrator extends DrupalFile6Migration {
 
   /**
    * Constructor method

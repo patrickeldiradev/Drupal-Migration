@@ -6,28 +6,28 @@
 function metu_drush_command() {
 
   $items = array();
-  $items['metu-convert-featured-slider'] = array(
+  $items['data-convert-featured-slider'] = array(
     'description' => 'Convert Featured Slider Content Type',
     'alias' => array('metu-cfs'),
     'arguments' => array(
       'lang' => 'Language of the node, like "en" or "tr" (without quotes)',
     ),
   );
-  $items['metu-load-node'] = array(
+  $items['data-load-node'] = array(
     'description' => 'Convert Featured Slider Content Type',
     'alias' => array('metu-ln'),
     'arguments' => array(
       'nid' => 'Node ID to load',
     ),
   );
-  $items['metu-convert-video-content'] = array(
+  $items['data-convert-video-content'] = array(
     'description' => 'Convert "Video Content" Content Type',
     'alias' => array('metu-cvc'),
     'arguments' => array(
       'lang' => 'Language of the node, like "en" or "tr" (without quotes)',
     ),
   );
-  $items['metu-fix-translations'] = array(
+  $items['data-fix-translations'] = array(
     'description' => 'Fix translations after migration process',
     'alias' => array('metu-ft'),
   );
@@ -39,7 +39,7 @@ function metu_drush_command() {
  * Drush Command: drush convert-fs $lang (default $lang = en)
  * Updates "Featured Slider" content type with the body of the local linked page
  */
-function drush_metu_convert_featured_slider($lang='en') {
+function drush_data_convert_featured_slider($lang='en') {
 
   // We are setting up the language of the nodes in consideration
   if (isset($lang)) {
@@ -102,7 +102,7 @@ function drush_metu_convert_featured_slider($lang='en') {
     $changed = $node->changed;
 
     // Check for internal links
-    preg_match('~^http[s]?\://[[w]{3}[\.]]?metu\.edu\.tr/(.*)~', $fsn['node_data_field_link_field_link_url'], $matches);
+    preg_match('~^http[s]?\://[[w]{3}[\.]]?example\.com/(.*)~', $fsn['node_data_field_link_field_link_url'], $matches);
 
     if (!empty($matches)) { // start $matches check
 
@@ -214,7 +214,7 @@ function drush_metu_convert_featured_slider($lang='en') {
  * Drush Command: drush load-node $nid
  * Loads node by its ID and dumps the node variables
  */
-function drush_metu_load_node($nid=0) {
+function drush_data_load_node($nid=0) {
 
   if($nid == 0) {
 
@@ -233,7 +233,7 @@ function drush_metu_load_node($nid=0) {
  * Drush Command: drush convert-vc $lang (default $lang = en)
  * Extracts Youtube link code and updates Video Embed field in "Video Content" content type
  */
-function drush_metu_convert_video_content($lang='en') {
+function drush_data_convert_video_content($lang='en') {
 
   // We are setting up the language of the nodes in consideration
   if (isset($lang)) {
@@ -319,7 +319,7 @@ function drush_metu_convert_video_content($lang='en') {
  * Drush Command: drush fix-tr
  * Fixes translation migrations after migrate operations
  */
-function drush_metu_fix_translations() {
+function drush_data_fix_translations() {
 
   // We want this function to run only in Drupal 7 and we check using PHP version_compare() function.
   if (version_compare(VERSION, '7', '<')) {

@@ -1,5 +1,5 @@
 <?php
-$options['shell-aliases']['convert-fs'] = 'metu-convert-featured-slider';
-$options['shell-aliases']['load-node'] = 'metu-load-node';
-$options['shell-aliases']['convert-vc'] = 'metu-convert-video-content';
-$options['shell-aliases']['fix-tr'] = 'metu-fix-translations';
+$options['shell-aliases']['convert-fs'] = 'orb-convert-featured-slider';
+$options['shell-aliases']['load-node'] = 'orb-load-node';
+$options['shell-aliases']['convert-vc'] = 'orb-convert-video-content';
+$options['shell-aliases']['fix-tr'] = 'orb-fix-translations';

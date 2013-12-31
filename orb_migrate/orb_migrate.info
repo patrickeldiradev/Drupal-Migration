@@ -1,6 +1,6 @@
-name = "METU Web Site Migration"
-description = "Migrate METU Main Page from D6 to D7"
-package = "METU-CC"
+name = "Data Migration"
+description = "Drupal 6 to Drupal 7 Web Site Migration Module"
+package = "Development"
 core = 7.x
 
 dependencies[] = migrate
