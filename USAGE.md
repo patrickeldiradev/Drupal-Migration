@@ -16,6 +16,7 @@ You can use following commands by installing the Drush module:
 * `drush convert-fs {lang}` where `{lang}` is `en` or `tr`. Defaults to `en`. (processes "featured slider" nodes and splits fields into ones that can be transferable)
 * `drush load-node {nid}` where `{nid}` is _Drupal Node ID_. (shows variables in the node, i.e. $node object)
 * `drush convert-vc {lang}` where `{lang}` is `en` or `tr`. Defaults to `en`. (processes "video content" nodes and splits fields into ones that can be transferable)
+* `drush fix-tr` (fixes translation match problem, migrate_d2d does not correctly map *tnid* values)
 
 ## Using metu_migrate Module ##
 
