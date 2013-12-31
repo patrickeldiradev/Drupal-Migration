@@ -28,4 +28,4 @@ $options['shell-aliases']['del-tax'] = 'orb-remove-taxonomy-term';
 $options['shell-aliases']['ext-imp'] = 'extern-import';
 $options['shell-aliases']['fix-fws'] = 'orb-fix-forwards';
 $options['shell-aliases']['unset-fu'] = 'orb-unset-forward-uri';
-
+$options['shell-aliases']['ch-ct-owner'] = 'orb-change-ct-owner';
