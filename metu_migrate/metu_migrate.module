@@ -265,6 +265,9 @@ class METUFSNodeMigrator extends DrupalNode6Migration {
 
     }
 
+    // Due to problems in translation migration, we are using a different database for its migration.
+    write_tnid_to_db($entity, $source_row);
+
   }
 
 }
@@ -312,6 +315,9 @@ class METUVCNodeMigrator extends DrupalNode6Migration {
     drush_print(' / ', 0, null, false);
     drush_print(t('Destination node') . ': ' . $entity->nid, 0, null, true);
 
+    // Due to problems in translation migration, we are using a different database for its migration.
+    write_tnid_to_db($entity, $source_row);
+
   }
 
 }
@@ -333,6 +339,17 @@ class METUPageNodeMigrator extends DrupalNode6Migration {
     $this->addFieldMapping('field_other_images:file_class')->defaultValue('MigrateFileFid');
     $this->addFieldMapping('field_post_files', 'field_post_files')->sourceMigration('FileMigration');
     $this->addFieldMapping('field_post_files:file_class')->defaultValue('MigrateFileFid');
+
+  }
+
+  /**
+   * complete() method from Migrate module
+   * Runs after node_save operation
+   */
+  public function complete($entity, stdClass $source_row) {
+
+    // Due to problems in translation migration, we are using a different database for its migration.
+    write_tnid_to_db($entity, $source_row);
 
   }
 
@@ -392,4 +409,24 @@ class METUFileMigrator extends DrupalFile6Migration {
   
   }
   
+}
+
+// Custom functions for common operations
+/**
+ * For translation update, it is needed to track source and destination nids.
+ * This function does this by writing the related data to the database
+ */
+function write_tnid_to_db($entity, stdClass $source_row) {
+
+  // Set active DB connection defined in Settings.php
+  db_set_active('default');
+
+  // Insert data to the table
+  db_insert('aa_translation_nodes')->fields(array(
+    'source_nid' => $source_row->nid,
+    'source_tnid' => $source_row->tnid,
+    'dest_nid' => $entity->nid,
+    )
+  )->execute();
+
 }
