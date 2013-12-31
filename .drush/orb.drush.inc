@@ -63,7 +63,14 @@ function orb_drush_command() {
     'description' => 'Unset forward_uri field',
     'alias' => array('orb-ufu'),
   );
-
+  $items['orb-change-ct-owner'] = array(
+    'description' => 'Change chosen Content Type owner',
+    'alias' => array('orb-ccto'),
+    'arguments' => array(
+      'ct' => 'Content Type machine name to change',
+      'username' => 'Username of the new owner',
+    ),
+  );
   return $items;
 }
 
@@ -552,3 +559,72 @@ function drush_orb_unset_forward_uri() {
 
 }
 
+/**
+ * Drush Command: drush ch-ct-owner
+ * Sets `forward_uri` field to an empty array
+ */
+function drush_orb_change_ct_owner($ct=null, $username=null) {
+
+  // We want this function to run only in Drupal 7 and we check using PHP version_compare() function.
+  if (version_compare(VERSION, '7', '<')) {
+
+    drush_set_error('Need Drupal 7 to run');
+    return false;
+
+  }
+  
+  // Some security precations
+  drush_print('This function is not secure! Please proceed with caution...');
+  drush_print('Continue? (y,n)', 0, null, false);
+  
+  // Get choice parameter from standard input (i.e. command line)
+  $confirmation = trim(fgets(STDIN));
+  
+  // Continue if only pressed "y". Otherwise quit.
+  if ($confirmation != 'y') {
+
+    drush_set_error('Script execution is stopped.');
+    return false;
+
+  }
+
+  // We don't like null parameters
+  if ($ct == null ||  $username == null) {
+
+    drush_set_error('Null parameters!');
+    return false;
+
+  }
+
+  // Load user account from the username
+  $account = user_load_by_name(check_plain($username));
+
+  // Add some security
+  $ct = check_plain($ct);
+
+  // Query nodes for the selected content type
+  $nodes = db_query("SELECT nid FROM node WHERE type = '$ct'");
+
+  // Start iteration
+  foreach ($nodes as $n) { // foreach start $nodes
+
+    // Open the node
+    $node = node_load($n->nid);
+
+    // Only process the nodes which is not owned by the given user
+    if ($node->name != $username) {
+
+      // Print some informational messages
+      drush_print('Processing ' . $node->nid);
+
+      // Set owner of the node
+      $node->uid = $account->uid;
+
+      // Save the opened node
+      node_save($node);
+
+    }
+
+  } // foreach end $nodes
+
+}
