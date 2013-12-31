@@ -21,7 +21,7 @@ You can use following commands by installing the Drush module:
 
 ### Installation ###
 
-* Install required modules discussed in [README](README.md) file, under __Requirements__ section.
+* Install required modules discussed in [README](README.md) file, under [Requirements](README.md#requirements) section.
 * Enable the modules using admin panel.
 * __NOTE:__ You can also use Drush to download and enable the required modules. If you want to use Drush:
     - Change directory to Drupal sites directory. (ex. __cd ~/wwwhome/drupal/sites/default__ )
