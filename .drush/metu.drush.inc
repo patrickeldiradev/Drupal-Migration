@@ -53,18 +53,15 @@ function drush_metu_convert_featured_slider($lang='en') {
         node_data_field_link.field_link_url AS node_data_field_link_field_link_url,
         node_data_field_link.field_link_title AS node_data_field_link_field_link_title,
         node_data_field_link.field_link_attributes AS node_data_field_link_field_link_attributes,
-        node.language AS node_language, node.type AS node_type,
+        node.language AS node_language,
+        node.type AS node_type,
         node.vid AS node_vid,
         node.created AS node_created
       FROM node node
-        LEFT JOIN term_node term_node ON node.vid = term_node.vid
-        LEFT JOIN term_data term_data ON term_node.tid = term_data.tid
-        LEFT JOIN content_field_link node_data_field_link ON node.vid = node_data_field_link.vid
+        LEFT JOIN content_type_featured_slider node_data_field_link ON node.vid = node_data_field_link.vid
       WHERE (node.status = 1)
         AND (node.type = '%s')
         AND (node.language = '%s')
-        AND (term_data.vid in ('5'))
-        AND (term_node.tid IN (25, 28, 27, 23, 22, 26, 24))
       GROUP BY nid
       ORDER BY node_created DESC
     ", array('featured_slider', $current_lang)
@@ -95,6 +92,9 @@ function drush_metu_convert_featured_slider($lang='en') {
 
     // It is better to open the node at the start
     $node = node_load(array("nid" => $fsn['nid']));
+
+    // Because there will be a node update, last update date might be changed. This is not wanted.
+    $changed = $node->changed;
 
     // Check for internal links
     preg_match('~^http[s]?\://[[w]{3}[\.]]?metu\.edu\.tr/(.*)~', $fsn['node_data_field_link_field_link_url'], $matches);
@@ -188,6 +188,11 @@ function drush_metu_convert_featured_slider($lang='en') {
     // Finally, we can save the node
     node_save($node);
 
+    // We need to get the changed date back to its original value
+    $node_update = new stdClass();
+    $node_update->changed = $changed;
+    drupal_write_record('node', $node_update, 'nid');
+
     $count_updated_fs_ct++;
 
   } // foreach end $fs_nodes
@@ -268,6 +273,9 @@ function drush_metu_convert_video_content($lang='en') {
     // It is better to open the node at the start
     $node = node_load(array("nid" => $fsn['nid']));
 
+    // Because there will be a node update, last update date might be changed. This is not wanted.
+    $changed = $node->changed;
+
     // Match Youtube link code. Ex: xsaFXx3jKJY
     preg_match('~http[s]?\://[[w]{3}[\.]]?youtube\.com/embed/(.*)(?:\?)~', $fsn['node_data_field_embedcode_field_embedcode_value'], $matches);
 
@@ -288,6 +296,11 @@ function drush_metu_convert_video_content($lang='en') {
 
     // We can save the node right now
     node_save($node);
+
+    // We need to get the changed date back to its original value
+    $node_update = new stdClass();
+    $node_update->changed = $changed;
+    drupal_write_record('node', $node_update, 'nid');
 
   } // foreach end $fs_nodes
 
