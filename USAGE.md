@@ -44,6 +44,18 @@ It is possible to use this module inside _Migrate UI_ or _Drush_.
     - `drush migrate-rollback --all` (removes all transferred data from D7 but not from D6)
     - __NOTE:__ You can use `drush | grep migrate` command in Linux to see all Migrate module related Drush commands
 
+## Step by step instructions ##
+
+* Configure Drupal 7 `settings.php` file and allow Drupal 7 to connect Drupal 6 database. Use `source` array element to define Drupal 6 database connection.
+* Install all requirements stated above.
+* Go to Drupal 6 site root.
+* Run `drush convert-fs en` and `drush convert-fs tr`
+* Run `drush convert-vc en` and `drush convert-vc tr`
+* Go to Drupal 7 site root.
+* Run `drush migrate-import --all`
+  * If you have problems, you can rollback migration using `drush migrate-rollback --all`
+  * If you added some content to Drupal 6 and want to transfer them to Drupal 7, run `drush migrate-update --all`
+
 ## Frequently Asked Questions ##
 
 __How can I download the code in Windows?__
